@@ -38,7 +38,7 @@ class LightingScene extends CGFscene
 		// Scene elements
 		this.table = new MyTable(this);
 		this.wall = new Plane(this);
-		this.floor = new MyQuad(this);
+		this.floor = new MyFloor(this);
 		
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS);
@@ -162,8 +162,6 @@ class LightingScene extends CGFscene
 		this.materialD.apply();
 		this.pushMatrix();
 			this.translate(7.5, 0, 7.5);
-			this.rotate(-90 * degToRad, 1, 0, 0);
-			this.scale(15, 15, 0.2);
 			this.floor.display();
 		this.popMatrix();
 

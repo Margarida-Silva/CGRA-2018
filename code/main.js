@@ -14,6 +14,7 @@ serialInclude([
 	'MyPrism.js',
 	'MyCylinder.js',
 	'MyLamp.js',
+	'MyFloor.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
