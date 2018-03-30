@@ -54,8 +54,7 @@ class Plane extends CGFobject{
 				
 				this.normals.push(0,0,1);
 
-				// texCoords should be computed here; uncomment and fill the blanks
-				// this.texCoords.push(..., ...);
+				 this.texCoords.push(i*this.patchLength, j*i.patchLength);
 
 				xCoord += this.patchLength;
 			}
