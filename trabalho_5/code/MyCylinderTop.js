@@ -29,13 +29,8 @@ class MyCylinderTop extends CGFobject
 			let angle = i * sliceAngle;
 			let x = Math.cos(angle);
 			let y = Math.sin(angle);
-
-			let normalX = Math.cos(angle);
-			let normalY = Math.sin(angle);
-
 			this.vertices.push(x, y, 0);
-            this.normals.push(normalX, normalY, 0);
-
+            this.normals.push(x, y, 0);
 			this.indices.push(0, i+1, (i + 2));
         }
         this.vertices.push(0,0,0);

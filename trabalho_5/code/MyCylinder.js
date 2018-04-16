@@ -11,6 +11,7 @@ class MyCylinder extends CGFobject
 		super(scene);
 		this.slices = slices;
 		this.stacks = stacks;
+		this.top = new MyCylinderTop(scene,slices);
 		this.initBuffers();
 	};
 
@@ -50,14 +51,32 @@ class MyCylinder extends CGFobject
 			let base1 = (this.stacks+1)*i + j;
 			let base2 = j //equivalent to i==0;
 			this.indices.push(base1 +1, base1, base2 + 1);
-			this.indices.push(base2, base2+1, base1);
-			
+			this.indices.push(base2, base2+1, base1);	
+			}	
 			}
-			
-			}
-		}
-			
+		}	
 		this.primitiveType=this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	};
+
+	display()
+	{
+		this.drawElements(this.primitiveType);
+
+		////// cylinder's bottom and top //////
+
+		let deg2rad = Math.PI/180.0;
+
+		//bottom
+		this.scene.pushMatrix();
+		this.scene.rotate(-180*deg2rad,1,0,0);	
+		this.top.display();
+		this.scene.popMatrix();
+		
+		//top
+		this.scene.pushMatrix();
+		this.scene.translate(0,0,1);
+		this.top.display();
+		this.scene.popMatrix();
+	}
 };

@@ -11,6 +11,7 @@ class MyPrism extends CGFobject
 		super(scene);
 		this.slices = slices;
 		this.stacks = stacks;
+		this.top = new MyCylinderTop(scene,slices);
 		this.initBuffers();
 	};
 
@@ -22,14 +23,13 @@ class MyPrism extends CGFobject
 
 		let deg2rad = Math.PI/180.0;
 		let sliceAngle = (360.0 / this.slices) * deg2rad;
-
+		
 		for( let i = 0; i < this.slices; i++)
 		{
 			let angle1 = i * sliceAngle;
 			let x1 = Math.cos(angle1);
-			let y1 = Math.sin(angle1);
-			
-			
+			let y1 = Math.sin(angle1);	
+
 
 			let angle2 = (i + 1 ) * sliceAngle;
 			let x2 = Math.cos(angle2);
@@ -50,9 +50,6 @@ class MyPrism extends CGFobject
 				this.vertices.push(x1, y1, j * (1.0/this.stacks));
 				this.vertices.push(x2, y2, (j+1) * (1.0/this.stacks));
 				this.vertices.push(x2, y2, j * (1.0/this.stacks));
-			
-
-			// O PROBLEMA ESTÁ NOS ÍNDICES
 
 			this.indices.push(4*j + 4*this.stacks*i,4*j + 4*this.stacks*i+ 1,4*j + 4*this.stacks*i+2);
 			this.indices.push(4*j + 4*this.stacks*i + 3, 4*j + 4*this.stacks*i + 2, 4*j + 4*this.stacks*i+ 1 );
@@ -64,9 +61,30 @@ class MyPrism extends CGFobject
 			this.normals.push(normalX, normalY, 0);
 			}
 		
-		}
-			
+		}	
 		this.primitiveType=this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	};
+
+	display()
+	{
+		this.drawElements(this.primitiveType);
+
+		////// prism's bottom and top //////
+
+		let deg2rad = Math.PI/180.0;
+
+		//bottom
+		this.scene.pushMatrix();
+		this.scene.rotate(-180*deg2rad,1,0,0);	
+		this.top.display();
+		this.scene.popMatrix();
+		
+		//top
+		this.scene.pushMatrix();
+		this.scene.translate(0,0,1);
+		this.top.display();
+		this.scene.popMatrix();
+
+	}
 };

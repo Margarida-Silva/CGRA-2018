@@ -34,7 +34,6 @@ class LightingScene extends CGFscene
 		this.prism = new MyPrism(this, 8, 20);
 		this.cylinder = new MyCylinder(this, 8, 20);
 		this.lamp = new MyLamp(this, 8, 20);
-		this.cylinderTop = new MyCylinderTop(this,8);
 
 		// Scene elements
 		this.table = new MyTable(this);
@@ -194,7 +193,7 @@ class LightingScene extends CGFscene
 		// ---- BEGIN Scene drawing section
 
 		// Floor
-		/*
+		
 		this.materialD.apply();
 		this.pushMatrix();
 			this.translate(7.5, 0, 7.5);
@@ -255,6 +254,7 @@ class LightingScene extends CGFscene
 			this.prism.display();
 		this.popMatrix();
 
+
 		// Cylinder
 		this.pushMatrix();
 		this.rotate(90 * degToRad, 1, 0, 0);
@@ -271,8 +271,8 @@ class LightingScene extends CGFscene
 			this.translate(6, 6, -6);
 			this.lamp.display();
 		this.popMatrix();
-		*/
-		this.cylinderTop.display();
+		
+		this.translate(0,0,1);
 
 		// ---- END Scene drawing section
 	};
