@@ -31,8 +31,8 @@ class LightingScene extends CGFscene
 
 		this.axis = new CGFaxis(this);
 
-		this.prism = new MyPrism(this, 8, 20);
-		this.cylinder = new MyCylinder(this, 8, 20);
+		this.prism = new MyPrism(this, 8, 20, true);
+		this.cylinder = new MyCylinder(this, 8, 20,true);
 		this.lamp = new MyLamp(this, 8, 20);
 
 		// Scene elements
@@ -40,6 +40,11 @@ class LightingScene extends CGFscene
 		this.wall = new Plane(this);
 		this.leftWall = new MyQuad(this,-1,2,-1,2);
 		this.floor = new MyFloor(this);
+		this.clock = new MyClock(this);
+
+		//this.clockHand = new MyClockHand(this);
+
+		this.cube = new MyUnitCubeQuad(this);
 		
 		this.boardA = new Plane(this, -0.1, 1, 2, -0.5, BOARD_A_DIVISIONS);
 		this.boardB = new Plane(this, 0, 1, 0, 1, BOARD_B_DIVISIONS);
@@ -92,6 +97,9 @@ class LightingScene extends CGFscene
 		this.boardAppearance.setShininess(0.9);
 		this.boardAppearance.setDiffuse(0.1, 0.1, 0.1, 1);
 		this.boardAppearance.loadTexture("../resources/images/board.png");
+
+		//update scene
+		this.setUpdatePeriod(100);
 	
 	};
 
@@ -271,9 +279,22 @@ class LightingScene extends CGFscene
 			this.translate(6, 6, -6);
 			this.lamp.display();
 		this.popMatrix();
+
+		// Clock
+		this.pushMatrix();
+		this.translate(7.25,7.25,0);
+		this.scale(0.7,0.7,0.7);
+		this.clock.display();
+		this.popMatrix();
+
 		
-		this.translate(0,0,1);
 
 		// ---- END Scene drawing section
 	};
+
+	update(currTime)
+	{
+		this.clock.update(currTime);
+		this.display();
+	}
 };
