@@ -44,10 +44,10 @@ class MyClock extends MyCylinder {
         let seconds = (timeStamp / 1000) % 60;
         //para mostrar segundo a segundo:  usar Math.floor(timeStamp/1000)%60
         let minutes = ((timeStamp / 1000)/60)%60;
-        let hours = (((timeStamp / 1000)/60)/60)%24;
+        let hours = (((timeStamp / 1000)/60)/60)%12;
 
         this.s.setAngle(seconds * (360 / 60));
         this.m.setAngle(minutes * (360 / 60));
-        this.h.setAngle(hours * (360/24));
+        this.h.setAngle(hours * (360/12));
     }
 }
