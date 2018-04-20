@@ -197,7 +197,6 @@ class LightingScene extends CGFscene
 		this.popMatrix();
 
 		// Plane Wall
-		this.materialC.apply();
 		this.pushMatrix();
 			this.materialC.apply();
 			this.translate(7.5, 4, 0);
