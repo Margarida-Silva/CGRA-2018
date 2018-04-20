@@ -295,6 +295,5 @@ class LightingScene extends CGFscene
 	update(currTime)
 	{
 		this.clock.update(currTime);
-		this.display();
 	}
 };
