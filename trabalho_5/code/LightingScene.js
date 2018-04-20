@@ -202,7 +202,6 @@ class LightingScene extends CGFscene
 		// ---- BEGIN Scene drawing section
 
 		// Floor
-		
 		this.materialD.apply();
 		this.pushMatrix();
 			this.translate(7.5, 0, 7.5);
@@ -287,7 +286,13 @@ class LightingScene extends CGFscene
 		this.scale(0.7,0.7,0.7);
 		this.clock.display();
 		this.popMatrix();
-
+		
+		// PaperPlane
+		this.pushMatrix();
+		this.translate(5,4.8,8);
+		this.rotate(-20*degToRad,0,0,1);
+		this.paperPlane.display();
+		this.popMatrix();
 
 		// ---- END Scene drawing section
 	};
@@ -295,5 +300,6 @@ class LightingScene extends CGFscene
 	update(currTime)
 	{
 		this.clock.update(currTime);
+		this.paperPlane.update(currTime);
 	}
 };
