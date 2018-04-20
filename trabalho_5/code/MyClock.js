@@ -41,7 +41,7 @@ class MyClock extends MyCylinder {
     }
 
     update(timeStamp) {
-        let seconds = (timeStamp / 1000) % 60;
+        let seconds = Math.floor(timeStamp / 1000) % 60;
         //para mostrar segundo a segundo:  usar Math.floor(timeStamp/1000)%60
         let minutes = ((timeStamp / 1000)/60)%60;
         let hours = (((timeStamp / 1000)/60)/60)%12;
