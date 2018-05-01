@@ -41,9 +41,7 @@ class LightingScene extends CGFscene
 		this.leftWall = new MyQuad(this,-1,2,-1,2);
 		this.floor = new MyFloor(this);
 		this.clock = new MyClock(this);
-		this.paperPlane = new MyPaperPlane(this);
-
-		//this.clockHand = new MyClockHand(this);
+		this.paperPlane = new MyPaperPlane(this,5,4.8,8);
 
 		this.cube = new MyUnitCubeQuad(this);
 		
@@ -200,7 +198,7 @@ class LightingScene extends CGFscene
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
-
+/*
 		// Floor
 		this.materialD.apply();
 		this.pushMatrix();
@@ -286,11 +284,11 @@ class LightingScene extends CGFscene
 		this.scale(0.7,0.7,0.7);
 		this.clock.display();
 		this.popMatrix();
-		
+*/
 		// PaperPlane
 		this.pushMatrix();
-		this.translate(5,4.8,8);
-		this.rotate(-20*degToRad,0,0,1);
+		//this.translate(5,4.8,8);
+		//this.rotate(-20*degToRad,0,0,1);
 		this.paperPlane.display();
 		this.popMatrix();
 
