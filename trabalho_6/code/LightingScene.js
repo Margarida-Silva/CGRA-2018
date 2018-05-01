@@ -21,7 +21,14 @@ class LightingScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.obj = new MyTrapeze(this);
+        this.obj = new MyCarTop(this);
+
+        //TEXTURA PARA EFEITOS DE TESTE
+		this.slidesAppearance = new CGFappearance(this);
+		this.slidesAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+		this.slidesAppearance.setShininess(0.1);
+		this.slidesAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+		this.slidesAppearance.loadTexture("../resources/images/teste.jpg");
 
     };
 
@@ -65,7 +72,7 @@ class LightingScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- END Background, camera and axis setup
-         
+        this.slidesAppearance.apply();  // TEXTURA PARA EFEITOS DE TESTE
         this.obj.display();
     };
 
