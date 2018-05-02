@@ -21,7 +21,8 @@ class LightingScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.obj = new MyCarTop(this);
+        this.obj = new MyVehicle(this);
+        this.quad = new MyQuad(this,0,1,0,1);
 
         //TEXTURA PARA EFEITOS DE TESTE
 		this.slidesAppearance = new CGFappearance(this);
@@ -53,6 +54,8 @@ class LightingScene extends CGFscene {
     };
 
     display() {
+        let deg2rad = Math.PI / 180.0;
+
         // ---- BEGIN Background, camera and axis setup
 
         // Clear image and depth buffer everytime we update the scene
@@ -72,8 +75,8 @@ class LightingScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- END Background, camera and axis setup
-        this.slidesAppearance.apply();  // TEXTURA PARA EFEITOS DE TESTE
         this.obj.display();
+
     };
 
 };

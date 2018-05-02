@@ -1,4 +1,4 @@
-class MyCarTop extends CGFobject {
+class MyVehicleTop extends CGFobject {
     constructor(scene) {
         super(scene);
         this.trapeze = new MyTrapeze(scene);
