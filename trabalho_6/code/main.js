@@ -14,6 +14,8 @@ serialInclude([
 	'MyTrapeze.js',
 	'MyVehicleTop.js',
 	'MyVehicle.js',
+	'MyVehicleBottom.js',
+	'MyWheelPlate.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

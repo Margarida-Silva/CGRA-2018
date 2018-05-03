@@ -13,6 +13,7 @@ class MyVehicle extends CGFobject
     {
         super(scene);
         this.top = new MyVehicleTop(scene);
+        this.bottom = new MyVehicleBottom(scene);
         this.quad = new MyQuad(scene,0,1,0,1);
     }
 
@@ -58,6 +59,13 @@ class MyVehicle extends CGFobject
         this.scene.scale(2.4,1,1);
         this.scene.translate(1.2/2.4,1.4-0.5,2.5);
         this.quad.display();
+        this.scene.popMatrix();
+
+        //bottom
+        this.scene.pushMatrix();
+        //this.scene.rotate(180*deg2rad,0,1,0);
+       // this.scene.translate(0, 0.4, 2.4);
+        this.bottom.display();
         this.scene.popMatrix();
     }
 }
