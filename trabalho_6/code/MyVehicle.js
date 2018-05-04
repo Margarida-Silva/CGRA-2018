@@ -15,6 +15,7 @@ class MyVehicle extends CGFobject
         this.top = new MyVehicleTop(scene);
         this.bottom = new MyVehicleBottom(scene);
         this.quad = new MyQuad(scene,0,1,0,1);
+        this.wheel = new MyCylinder(scene, 20, 5, true);
     }
 
     //centrado na origem do referencial
@@ -63,9 +64,35 @@ class MyVehicle extends CGFobject
 
         //bottom
         this.scene.pushMatrix();
-        //this.scene.rotate(180*deg2rad,0,1,0);
-       // this.scene.translate(0, 0.4, 2.4);
         this.bottom.display();
+        this.scene.popMatrix();
+
+        //left front wheel
+        this.scene.pushMatrix();
+        this.scene.scale(0.53,0.53 , 0.3);
+        this.scene.translate(1.30*2, 1, 7.15)
+        this.wheel.display();
+        this.scene.popMatrix();
+
+        //right front wheel
+        this.scene.pushMatrix();
+        this.scene.scale(0.53,0.53 , 0.3);
+        this.scene.translate(1.30*2, 1, -0.15)
+        this.wheel.display();
+        this.scene.popMatrix();
+
+        //left back wheel
+        this.scene.pushMatrix();
+        this.scene.scale(0.53,0.53 , 0.3);
+        this.scene.translate(-1.35*2, 1, 7.15)
+        this.wheel.display();
+        this.scene.popMatrix();
+
+        //right back wheel
+        this.scene.pushMatrix();
+        this.scene.scale(0.53,0.53 , 0.3);
+        this.scene.translate(-1.35*2, 1, -0.15);
+        this.wheel.display();
         this.scene.popMatrix();
     }
 }
