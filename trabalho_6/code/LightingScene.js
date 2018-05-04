@@ -21,7 +21,7 @@ class LightingScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.obj = new MyVehicle(this);
+        this.obj = new Plane(this,0,50,0,50,50);
         this.quad = new MyQuad(this,0,1,0,1);
 
         //TEXTURA PARA EFEITOS DE TESTE
@@ -37,12 +37,25 @@ class LightingScene extends CGFscene {
         this.light4 = true;
         this.speed=3;
 
+		this.boardAppearance = new CGFappearance(this);
+		this.boardAppearance.setSpecular(0.5, 0.5, 0.5, 1);
+		this.boardAppearance.setShininess(0.9);
+		this.boardAppearance.setDiffuse(0.1, 0.1, 0.1, 1);
+		this.boardAppearance.loadTexture("../resources/images/board.png");
+        this.boardAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
     };
 
+    updateLights() 
+	{
+		for (var i = 0; i < this.lights.length; i++)
+			this.lights[i].update();
+	}
+
+
     initLights() {
 
-        this.lights[0].setPosition(15, 2, 5, 1);
+        this.lights[0].setPosition(1, 1, 1, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
@@ -79,6 +92,7 @@ class LightingScene extends CGFscene {
 
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+        this.updateLights();
 
         // Draw axis
         this.axis.display();
@@ -86,6 +100,10 @@ class LightingScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- END Background, camera and axis setup
+
+
+        this.boardAppearance.apply();
+
         this.obj.display();
 
     };
