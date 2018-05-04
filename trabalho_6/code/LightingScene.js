@@ -25,6 +25,7 @@ class LightingScene extends CGFscene {
         this.quad = new MyQuad(this,0,1,0,1);
 
         //TEXTURA PARA EFEITOS DE TESTE
+<<<<<<< HEAD
 		this.slidesAppearance = new CGFappearance(this);
 		this.slidesAppearance.setSpecular(0.1, 0.1, 0.1, 1);
 		this.slidesAppearance.setShininess(0.1);
@@ -37,12 +38,14 @@ class LightingScene extends CGFscene {
         this.light4 = true;
         this.speed=3;
 
+=======
 		this.boardAppearance = new CGFappearance(this);
 		this.boardAppearance.setSpecular(0.5, 0.5, 0.5, 1);
 		this.boardAppearance.setShininess(0.9);
 		this.boardAppearance.setDiffuse(0.1, 0.1, 0.1, 1);
 		this.boardAppearance.loadTexture("../resources/images/board.png");
         this.boardAppearance.setTextureWrap('REPEAT', 'REPEAT');
+>>>>>>> 65b1847cca0e79ebd78290cbc26df1eb5088324b
 
     };
 

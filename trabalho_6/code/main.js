@@ -16,8 +16,11 @@ serialInclude([
 	'MyVehicle.js',
 	'MyVehicleBottom.js',
 	'MyWheelPlate.js',
+<<<<<<< HEAD
 	'MyInterface.js',
+=======
 	'MyTerrain.js',
+>>>>>>> 65b1847cca0e79ebd78290cbc26df1eb5088324b
 
 	main=function() {
 		var app = new CGFapplication(document.body);
