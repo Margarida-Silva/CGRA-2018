@@ -73,9 +73,9 @@ class LightingScene extends CGFscene {
         this.setShininess(10.0);
     };
 
-    doSomething(){
-         console.log("Doing something..."); 
-        };
+    drawAxis(){
+         this.axis.display();
+    };
 
     display() {
         let deg2rad = Math.PI / 180.0;
@@ -95,7 +95,7 @@ class LightingScene extends CGFscene {
         this.updateLights();
 
         // Draw axis
-        this.axis.display();
+       // this.axis.display();
 
         this.setDefaultAppearance();
 
