@@ -29,7 +29,14 @@ class LightingScene extends CGFscene {
 		this.slidesAppearance.setSpecular(0.1, 0.1, 0.1, 1);
 		this.slidesAppearance.setShininess(0.1);
 		this.slidesAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
-		this.slidesAppearance.loadTexture("../resources/images/teste.jpg");
+        this.slidesAppearance.loadTexture("../resources/images/teste.jpg");
+        
+        this.light1 = true;
+        this.light2 = true;
+        this.light3 = true;
+        this.light4 = true;
+        this.speed=3;
+
 
     };
 
@@ -52,6 +59,10 @@ class LightingScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     };
+
+    doSomething(){
+         console.log("Doing something..."); 
+        };
 
     display() {
         let deg2rad = Math.PI / 180.0;
