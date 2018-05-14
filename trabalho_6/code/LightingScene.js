@@ -24,7 +24,7 @@ class LightingScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.axisState = 0; //off
         this.terrain = new MyTerrain(this, 50);
-        this.vehicle = new MyVehicle(this, this.speed);
+        this.vehicle = new MyVehicle(this);
 
         //TEXTURA PARA EFEITOS DE TESTE
         this.slidesAppearance = new CGFappearance(this);
