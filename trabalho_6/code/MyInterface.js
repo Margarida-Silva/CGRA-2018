@@ -49,6 +49,10 @@ class MyInterface extends CGFinterface {
 		// min and max values can be specified as parameters
 		this.gui.add(this.scene, 'speed', 0, 2);
 		this.initKeys();
+
+		//textures controller
+		this.gui.add(this.scene,'vehicleAppearance',this.scene.vehicleAppearanceList).name("Textures");
+
 		return true;
 	};
 

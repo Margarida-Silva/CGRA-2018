@@ -26,15 +26,31 @@ class LightingScene extends CGFscene {
         this.terrain = new MyTerrain(this, 50);
         this.vehicle = new MyVehicle(this);
 
-        //TEXTURA PARA EFEITOS DE TESTE
-        this.slidesAppearance = new CGFappearance(this);
-        this.slidesAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-        this.slidesAppearance.setShininess(0.1);
-        this.slidesAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.slidesAppearance.loadTexture("../resources/images/teste.jpg");
-        //this.slidesAppearance.setTextureWrap('REPEAT', 'REPEAT');
+        //TEXTURAS
 
+        this.vehicleAppearances = [];
+        this.vehicleAppearanceList = [];
 
+        let metalAppearance = new CGFappearance(this);
+        metalAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        metalAppearance.setShininess(0.1);
+        metalAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        metalAppearance.loadTexture("../resources/images/metal.jpg");
+        this.vehicleAppearances[0] = metalAppearance;
+        this.vehicleAppearanceList[0] = 'Metal';
+
+        let flamesAppearance = new CGFappearance(this);
+        flamesAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        flamesAppearance.setShininess(0.1);
+        flamesAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        flamesAppearance.loadTexture("../resources/images/flames.jpg");
+        this.vehicleAppearances[1] = flamesAppearance;
+        this.vehicleAppearanceList[1] = 'Flames';
+
+        this.currVehicleAppearance = '0';
+        this.vehicleAppearance = 'Metal';
+
+        //LUZES
         this.lightsState = {};
         this['light1'] = true;
         this['light2'] = true;
@@ -152,6 +168,7 @@ class LightingScene extends CGFscene {
 
     update(currTime) {
         this.checkKeys();
+        this.currVehicleAppearance = this.vehicleAppearanceList.indexOf(this.vehicleAppearance);
     }
 
     display() {
@@ -183,7 +200,8 @@ class LightingScene extends CGFscene {
         this.terrain.display();
 
         //display vehicle
-        this.slidesAppearance.apply();
+        if (this.vehicleAppearances[this.currVehicleAppearance] instanceof CGFappearance)
+            this.vehicleAppearances[this.currVehicleAppearance].apply();
         this.vehicle.display();
 
     };
