@@ -6,6 +6,7 @@ class MyVehicle extends CGFobject {
     -altura:2
     -comprimento da base maior do trapezio: 3
     -altura do trapezio: 0.6
+    -raio das rodas: 0.53
 
     */
     constructor(scene) {
@@ -15,6 +16,7 @@ class MyVehicle extends CGFobject {
         this.quad = new MyQuad(scene, 0, 1, 0, 1);
         this.wheel = new MyCylinder(scene, 20, 5, true);
 
+        this.wheelsAngleMovement = 0;   //only when there's motion
         this.rotationAngle = Math.PI / 100;
         this.steerAngle = 0;
 
@@ -45,8 +47,10 @@ class MyVehicle extends CGFobject {
         this.steerAngleRotation = 0;
 
         this.scene.translate(this.carLocation[0], 0, -this.carLocation[1]);
-        this.scene.rotate(this.carHeading,0,1,0);
+        this.scene.rotate(this.carHeading, 0, 1, 0);
 
+        let angularVelocity = (-this.carSpeed / 0.53); //0.53: wheel's radius
+        this.wheelsAngleMovement += angularVelocity;
 
         //top
         this.scene.pushMatrix();
@@ -101,6 +105,7 @@ class MyVehicle extends CGFobject {
         this.scene.translate(1.35, 0.53, -1.2);
         this.scene.rotate(this.steerAngle, 0, 1, 0);
         this.scene.rotate(-this.steerAngleRotation, 0, 0, 1);
+        this.scene.rotate(this.wheelsAngleMovement, 0, 0, 1);
         this.scene.scale(0.53, 0.53, 0.3);
         this.wheel.display();
         this.scene.popMatrix();
@@ -111,6 +116,7 @@ class MyVehicle extends CGFobject {
         this.scene.translate(1.35, 0.53, 1.2 - 0.3);
         this.scene.rotate(this.steerAngle, 0, 1, 0);
         this.scene.rotate(-this.steerAngleRotation, 0, 0, 1);
+        this.scene.rotate(this.wheelsAngleMovement, 0, 0, 1);
         this.scene.scale(0.53, 0.53, 0.3);
         this.wheel.display();
         this.scene.popMatrix();
@@ -120,6 +126,7 @@ class MyVehicle extends CGFobject {
         this.scene.scale(0.53, 0.53, 0.3);
         this.scene.translate(-1.35 * 2, 1, (1.2 - 0.3) / 0.3);
         this.scene.rotate(-this.steerAngleRotation, 0, 0, 1);
+        this.scene.rotate(this.wheelsAngleMovement, 0, 0, 1);
         this.wheel.display();
         this.scene.popMatrix();
 
@@ -128,6 +135,7 @@ class MyVehicle extends CGFobject {
         this.scene.scale(0.53, 0.53, 0.3);
         this.scene.translate(-1.35 * 2, 1, -1.2 / 0.3);
         this.scene.rotate(-this.steerAngleRotation, 0, 0, 1);
+        this.scene.rotate(this.wheelsAngleMovement, 0, 0, 1);
         this.wheel.display();
         this.scene.popMatrix();
 
@@ -136,22 +144,23 @@ class MyVehicle extends CGFobject {
     };
 
     update(motionDirection) {
-        
+
         //update the vehicle's position
         if (motionDirection == 'W')
             this.carSpeed = this.carSpeed + 0.001;
         if (motionDirection == 'S')
-            this.carSpeed = this.carSpeed -  0.001;
+            this.carSpeed = this.carSpeed - 0.001;
         if (motionDirection == 'A') {
             this.steerAngle += this.rotationAngle;
             if (this.steerAngle >= (Math.PI / 4))
                 this.steerAngle = (Math.PI / 4);
 
         }
-     if (motionDirection == 'D') {
+        if (motionDirection == 'D') {
             this.steerAngle -= this.rotationAngle;
             if (Math.abs(this.steerAngle) >= (Math.PI / 4))
                 this.steerAngle = - (Math.PI / 4);
         }
+
     }
 }
