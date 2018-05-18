@@ -62,6 +62,7 @@ class LightingScene extends CGFscene {
         this.axisState = 0; //off
         this.terrain = new MyTerrain(this, 30, this.altimetry);
         this.vehicle = new MyVehicle(this);
+        this.crane = new MyCrane(this);
 
         //TEXTURAS
 
@@ -241,6 +242,13 @@ class LightingScene extends CGFscene {
         if (this.vehicleAppearances[this.currVehicleAppearance] instanceof CGFappearance)
             this.vehicleAppearances[this.currVehicleAppearance].apply();
         this.vehicle.display();
+
+
+        //display crane
+        this.pushMatrix();
+        this.translate(10, 1, -10);
+        this.crane.display();
+        this.popMatrix();
 
     };
 
