@@ -81,6 +81,7 @@ class LightingScene extends CGFscene {
         flamesAppearance.setShininess(0.1);
         flamesAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
         flamesAppearance.loadTexture("../resources/images/flames.jpg");
+        flamesAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
         this.vehicleAppearances[1] = flamesAppearance;
         this.vehicleAppearanceList[1] = 'Flames';
 
