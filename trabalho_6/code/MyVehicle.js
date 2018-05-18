@@ -25,6 +25,14 @@ class MyVehicle extends CGFobject {
         this.carSpeed = 0;
         this.wheelBase = 3.0;
         this.dt = 2;
+
+        //Tire texture
+        this.tireAppearance = new CGFappearance(scene);
+        this.tireAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.tireAppearance.setShininess(0.1);
+        this.tireAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tireAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
+        this.tireAppearance.loadTexture("../resources/images/tire.jpg");
     }
 
     //centrado na origem do referencial
@@ -98,6 +106,8 @@ class MyVehicle extends CGFobject {
         this.scene.translate(0, 0, -1.2);
         this.bottom.display();
         this.scene.popMatrix();
+
+        this.tireAppearance.apply();
 
 
         //left front wheel
