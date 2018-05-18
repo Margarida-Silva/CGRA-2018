@@ -65,19 +65,13 @@ class MyCylinder extends CGFobject {
 				s-= ds;
 			}
 			t-=dt;
-		}/*
-		this.vertices.push(1,0,0);
-		this.normals.push(1, 0, 0);
-		this.texCoords.push(1,0);
-		this.vertices.push(1,0,1);
-		this.texCoords.push(0,0);*/
+		}
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	};
 
-	display() {
-		this.drawElements(this.primitiveType);
-/*
+	displayTop()
+	{
 		if (this.withTop) {
 			////// cylinder's bottom and top //////
 
@@ -94,6 +88,10 @@ class MyCylinder extends CGFobject {
 			this.scene.translate(0, 0, 1);
 			this.top.display();
 			this.scene.popMatrix();
-		}*/
+		}
+	}
+
+	display() {
+		this.drawElements(this.primitiveType);
 	}
 };

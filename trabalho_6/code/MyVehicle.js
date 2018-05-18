@@ -14,7 +14,7 @@ class MyVehicle extends CGFobject {
         this.top = new MyVehicleTop(scene);
         this.bottom = new MyVehicleBottom(scene);
         this.quad = new MyQuad(scene, 0, 1, 0, 1);
-        this.wheel = new MyCylinder(scene, 20, 5, true);
+        this.wheel = new MyCylinder(scene, 100, 5, true);
 
         this.wheelsAngleMovement = 0;   //only when there's motion
         this.rotationAngle = Math.PI / 100;
@@ -31,8 +31,16 @@ class MyVehicle extends CGFobject {
         this.tireAppearance.setSpecular(0.1, 0.1, 0.1, 1);
         this.tireAppearance.setShininess(0.1);
         this.tireAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.tireAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
-        this.tireAppearance.loadTexture("../resources/images/tire.jpg");
+        this.tireAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.tireAppearance.loadTexture("../resources/images/tire.png");
+
+        //Tire's top texture
+        this.tireTopAppearance = new CGFappearance(scene);
+        this.tireTopAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.tireTopAppearance.setShininess(0.1);
+        this.tireTopAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tireTopAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.tireTopAppearance.loadTexture("../resources/images/tire_rim.jpg");
     }
 
     //centrado na origem do referencial
@@ -117,7 +125,10 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(-this.steerAngleRotation, 0, 0, 1);
         this.scene.rotate(this.wheelsAngleMovement, 0, 0, 1);
         this.scene.scale(0.53, 0.53, 0.3);
+        this.tireAppearance.apply();
         this.wheel.display();
+        this.tireTopAppearance.apply();
+        this.wheel.displayTop();
         this.scene.popMatrix();
 
 
@@ -128,7 +139,10 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(-this.steerAngleRotation, 0, 0, 1);
         this.scene.rotate(this.wheelsAngleMovement, 0, 0, 1);
         this.scene.scale(0.53, 0.53, 0.3);
+        this.tireAppearance.apply();
         this.wheel.display();
+        this.tireTopAppearance.apply();
+        this.wheel.displayTop();
         this.scene.popMatrix();
 
         //right back wheel
@@ -137,7 +151,10 @@ class MyVehicle extends CGFobject {
         this.scene.translate(-1.35 * 2, 1, (1.2 - 0.3) / 0.3);
         this.scene.rotate(-this.steerAngleRotation, 0, 0, 1);
         this.scene.rotate(this.wheelsAngleMovement, 0, 0, 1);
+        this.tireAppearance.apply();
         this.wheel.display();
+        this.tireTopAppearance.apply();
+        this.wheel.displayTop();
         this.scene.popMatrix();
 
         //left back wheel
@@ -146,7 +163,10 @@ class MyVehicle extends CGFobject {
         this.scene.translate(-1.35 * 2, 1, -1.2 / 0.3);
         this.scene.rotate(-this.steerAngleRotation, 0, 0, 1);
         this.scene.rotate(this.wheelsAngleMovement, 0, 0, 1);
+        this.tireAppearance.apply();
         this.wheel.display();
+        this.tireTopAppearance.apply();
+        this.wheel.displayTop();
         this.scene.popMatrix();
 
         this.scene.popMatrix();
@@ -171,6 +191,11 @@ class MyVehicle extends CGFobject {
             if (Math.abs(this.steerAngle) >= (Math.PI / 4))
                 this.steerAngle = - (Math.PI / 4);
         }
+
+        if (this.carSpeed > 0.25)
+            this.carSpeed = 0.25;
+        else if (this.carSpeed < -0.25)
+            this.carSpeed = -0.25;
 
     }
 }
