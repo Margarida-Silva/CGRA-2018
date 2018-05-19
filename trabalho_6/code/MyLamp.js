@@ -56,8 +56,8 @@ class MyLamp extends CGFobject {
 					let base2 = (this.stacks + 1) * i + j + 1;
 
 					this.vertices.push(base1+1, 0, base2+1);
-				}
-*/
+				}*/
+
 				
 					if (i > 0) {
 						let base1 = (this.stacks + 1) * (i - 1) + j + 1;
@@ -71,7 +71,6 @@ class MyLamp extends CGFobject {
 						let base2 = j + 1 //equivalent to i==0;
 						this.indices.push(base1 + 1, base1, base2 + 1);
 						this.indices.push(base2, base2 + 1, base1);
-
 					}
 				
 

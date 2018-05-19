@@ -13,8 +13,11 @@ class MyVehicle extends CGFobject {
         super(scene);
         this.top = new MyVehicleTop(scene);
         this.bottom = new MyVehicleBottom(scene);
-        this.quad = new MyQuad(scene, 0, 1, 0, 1);
+        this.quad = new Plane(scene, 0, 1, 0, 1, 20);
         this.wheel = new MyCylinder(scene, 100, 5, true);
+        this.lamp = new MyLamp(scene,20,20);
+
+        this.currApperance = null;
 
         this.wheelsAngleMovement = 0;   //only when there's motion
         this.rotationAngle = Math.PI / 100;
@@ -41,6 +44,13 @@ class MyVehicle extends CGFobject {
         this.tireTopAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
         this.tireTopAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
         this.tireTopAppearance.loadTexture("../resources/images/tire_rim.jpg");
+
+        //Vehicle's lamp
+        this.lampAppearance = new CGFappearance(scene);
+		this.lampAppearance.setAmbient(0.3,0.3,0.3,1);
+		this.lampAppearance.setDiffuse(0.8,0.8,0.9,1);
+		this.lampAppearance.setSpecular(0.2,0.2,0.2,1);	
+		this.lampAppearance.setShininess(120);
     }
 
     //centrado na origem do referencial
@@ -68,6 +78,8 @@ class MyVehicle extends CGFobject {
         let angularVelocity = (-this.carSpeed / 0.53); //0.53: wheel's radius
         this.wheelsAngleMovement += angularVelocity;
 
+        this.applyCurrAppearance();
+
         //top
         this.scene.pushMatrix();
         this.scene.translate(-0.25, 1.4, -1.2);
@@ -81,7 +93,15 @@ class MyVehicle extends CGFobject {
         this.scene.scale(1.20, 2.4, 1);
         this.scene.translate(((1.2 / 2) / 1.2) + (1.25 / 1.2), 0, 1.4);
         this.quad.display();
+        this.scene.rotate(90*deg2rad,0,1,0);
+        this.scene.scale(0.2/1.2,0.2/2.4,0.2);
+        this.scene.translate(3,4,2);
+        this.lampAppearance.apply();
+        this.lamp.display();
+        this.scene.translate(0,-8,0);
+        this.lamp.display();
         this.scene.popMatrix();
+        this.applyCurrAppearance();
 
         //back
         this.scene.pushMatrix();
@@ -172,6 +192,17 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
     };
+
+    setAppearance(appearance)
+    {
+        this.currApperance = appearance;
+    };
+
+    applyCurrAppearance()
+    {
+        if (this.currApperance instanceof CGFappearance)
+            this.currApperance.apply();
+    }
 
     update(motionDirection) {
 

@@ -59,6 +59,7 @@ class Plane extends CGFobject {
 					this.vertices.push(xCoord, yCoord, this.altimetry[i][j]);
 				else
 					this.vertices.push(xCoord, yCoord, 0);
+		
 
 				// As this plane is being drawn on the xy plane, the normal to the plane will be along the positive z axis.
 				// So all the vertices will have the same normal, (0, 0, 1).
