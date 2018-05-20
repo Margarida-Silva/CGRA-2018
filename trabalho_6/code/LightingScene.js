@@ -237,20 +237,25 @@ class LightingScene extends CGFscene {
         // ---- END Background, camera and axis setup
 
         //display terrain
+        
         this.terrain.display();
+        
 
         //display vehicle
+        
         if (this.vehicleAppearances[this.currVehicleAppearance] instanceof CGFappearance)
             this.vehicle.setAppearance(this.vehicleAppearances[this.currVehicleAppearance]);
         this.vehicle.display();
+        
 
 
         //display crane
+        /*
         this.pushMatrix();
         this.translate(10, 1, -10);
         this.crane.display();
         this.popMatrix();
-
+*/
     };
 
 };
