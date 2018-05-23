@@ -250,12 +250,11 @@ class LightingScene extends CGFscene {
 
 
         //display crane
-        /*
         this.pushMatrix();
         this.translate(10, 1, -10);
         this.crane.display();
         this.popMatrix();
-*/
+
     };
 
 };
