@@ -299,5 +299,6 @@ class LightingScene extends CGFscene
 	{
 		this.clock.update(currTime);
 		this.paperPlane.update(currTime);
+		this.crane.update(currTime);
 	}
 };

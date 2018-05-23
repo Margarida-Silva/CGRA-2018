@@ -1,8 +1,8 @@
 class LightingScene extends CGFscene {
+    
     constructor() {
         super();
     }
-
 
     init(application) {
         super.init(application);
@@ -97,6 +97,9 @@ class LightingScene extends CGFscene {
         this['light4'] = true;
         this['light5'] = true;
         this['wheels angle'] = 0;
+
+        //update scene
+		this.setUpdatePeriod(5);
 
     };
 
@@ -202,17 +205,22 @@ class LightingScene extends CGFscene {
             this.vehicle.update('D', this.speed);
             keysPressed = true;
         }
+        if (this.gui.isKeyPressed("KeyR")) {
+            text += " R ";
+            this.crane.move();
+            keysPressed = true;
+        }
         if (keysPressed)
             console.log(text);
     }
 
-    update(currTime) {
+    inputHandle() {
         this.checkKeys();
         this.currVehicleAppearance = this.vehicleAppearanceList.indexOf(this.vehicleAppearance);
     }
 
     display() {
-        this.update();
+        this.inputHandle();
         let deg2rad = Math.PI / 180.0;
 
         // ---- BEGIN Background, camera and axis setup
@@ -245,16 +253,21 @@ class LightingScene extends CGFscene {
         
         if (this.vehicleAppearances[this.currVehicleAppearance] instanceof CGFappearance)
             this.vehicle.setAppearance(this.vehicleAppearances[this.currVehicleAppearance]);
+        
+        if (!this.vehicle.isAttached)
         this.vehicle.display();
         
 
 
         //display crane
         this.pushMatrix();
-        this.translate(10, 1, -10);
         this.crane.display();
         this.popMatrix();
 
     };
+
+    update(currTime){
+        this.crane.update(currTime, this.vehicle);
+    }
 
 };

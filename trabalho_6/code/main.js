@@ -21,6 +21,7 @@ serialInclude([
 	'MyCrane.js',
 	'MyCraneArm.js',
 	'MyPrism.js',
+	'MyMagnet.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

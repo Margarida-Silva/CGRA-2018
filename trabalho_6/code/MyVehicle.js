@@ -29,6 +29,9 @@ class MyVehicle extends CGFobject {
         this.wheelBase = 3.0;
         this.dt = 2;
 
+        this.isAttached = false;
+
+
         //Tire texture
         this.tireAppearance = new CGFappearance(scene);
         this.tireAppearance.setSpecular(0.1, 0.1, 0.1, 1);
@@ -55,6 +58,8 @@ class MyVehicle extends CGFobject {
 
     //centrado na origem do referencial
     display() {
+        console.log(this.carLocation[0]+ ", "+ this.carLocation[1]);
+
         let deg2rad = Math.PI / 180.0;
 
         this.scene.pushMatrix();
