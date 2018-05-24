@@ -64,7 +64,11 @@ class Plane extends CGFobject {
 				// As this plane is being drawn on the xy plane, the normal to the plane will be along the positive z axis.
 				// So all the vertices will have the same normal, (0, 0, 1).
 
-				this.normals.push(0, 0, 1);
+
+				/*let nx = Math.cos(Math.atan(xCoord/yCoord));
+				let ny = Math.sin(Math.atan(xCoord/yCoord));
+				this.normals.push(nx, ny, 0);*/
+				this.normals.push(0,0,1);
 
 				// texCoords should be computed here; uncomment and fill the blanks
 				this.texCoords.push(s, t);
