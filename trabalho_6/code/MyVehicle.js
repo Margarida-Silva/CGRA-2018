@@ -77,7 +77,6 @@ class MyVehicle extends CGFobject {
 
     //centrado na origem do referencial
     display() {
-        console.log(this.carLocation[0]+ ", "+ this.carLocation[1]);
 
         let deg2rad = Math.PI / 180.0;
 
