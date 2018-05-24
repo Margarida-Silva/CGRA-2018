@@ -12,8 +12,8 @@ class MyCrane extends CGFobject {
         this.magnet = new MyMagnet(scene);
 
         let deg2rad = Math.PI / 180.0;
-        this.arm1angle = 20*deg2rad;
-        this.arm2angle = -10 * deg2rad;
+        this.arm1angle = 0*deg2rad;
+        this.arm2angle = 0* deg2rad;
 
         //"Recolha"
         this.RX1 = 5;
@@ -51,13 +51,14 @@ class MyCrane extends CGFobject {
         this.scene.rotate(this.horizontalAngle, 0, 1, 0);
 
         //Base
-        /*
+        
         this.scene.pushMatrix();
-        this.scene.scale(0.5, 0.5, 0.5);
+        this.scene.translate(0, 0.5, 0);
+        this.scene.scale(0.7, 0.5, 0.7);
         this.scene.rotate(90*deg2rad, 1, 0, 0);
         this.base.display();
         this.scene.popMatrix();
-        */
+        
         
 
         //Everything execept the base will be rotated angle1 + arm1angle degrees
@@ -86,9 +87,10 @@ class MyCrane extends CGFobject {
          //Arm2
          
          this.scene.pushMatrix();
-         this.scene.scale(1, 1, 0.7);
          this.scene.translate(0, 5, 0);
+         this.scene.scale(1, 1, 0.7);
          this.scene.rotate(this.arm2angle, 1, 0, 0);
+         this.scene.translate(0, -0.15, 0);
          this.arm.display();
          this.scene.popMatrix();
          
@@ -97,8 +99,8 @@ class MyCrane extends CGFobject {
          this.scene.popMatrix();
 
          this.scene.pushMatrix();
-         this.scene.translate(0, Math.cos(this.arm1angle) * 5 - Math.sin(this.arm2angle +this.arm1angle )*5*0.7, Math.sin(this.arm1angle)*5 + Math.cos(this.arm2angle+this.arm1angle)*5*0.7);
-        //console.log("arm1: " + this.arm1angle + "  arm2:" + this.arm2angle);
+         //this.scene.translate(0, 0, -0.5);
+         this.scene.translate(0, Math.cos(this.arm1angle) * 5 - Math.sin(this.arm2angle + this.arm1angle)*5*0.7, Math.sin(this.arm1angle)*5 + Math.cos(this.arm2angle + this.arm1angle)*5*0.7);
          this.magnet.display();
          this.scene.popMatrix();
 
@@ -111,9 +113,9 @@ class MyCrane extends CGFobject {
          this.scene.popMatrix();
          
          this.scene.pushMatrix();
-         this.scene.translate(10, 0.5, -10);
+         this.scene.translate(10, 0, -10);
          this.scene.rotate(this.horizontalAngle, 0, 1, 0);
-         this.scene.translate(-10, -0.5, 10);
+         this.scene.translate(-10, -0, 10);
          if (this.vehicle != null){
              console.log("displaying");
          this.vehicle.display();
