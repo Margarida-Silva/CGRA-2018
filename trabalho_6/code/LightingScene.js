@@ -69,25 +69,35 @@ class LightingScene extends CGFscene {
         this.vehicleAppearances = [];
         this.vehicleAppearanceList = [];
 
-        let metalAppearance = new CGFappearance(this);
-        metalAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-        metalAppearance.setShininess(0.1);
-        metalAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
-        metalAppearance.loadTexture("../resources/images/metal.jpg");
-        this.vehicleAppearances[0] = metalAppearance;
-        this.vehicleAppearanceList[0] = 'Metal';
+        let blueAppearance = new CGFappearance(this);
+        blueAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        blueAppearance.setShininess(0.1);
+        blueAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        blueAppearance.loadTexture("../resources/images/blue.jpg");
+        blueAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
+        this.vehicleAppearances[0] = blueAppearance;
+        this.vehicleAppearanceList[0] = 'Blue';
 
-        let flamesAppearance = new CGFappearance(this);
-        flamesAppearance.setSpecular(0.1, 0.1, 0.1, 1);
-        flamesAppearance.setShininess(0.1);
-        flamesAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
-        flamesAppearance.loadTexture("../resources/images/flames.jpg");
-        flamesAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
-        this.vehicleAppearances[1] = flamesAppearance;
-        this.vehicleAppearanceList[1] = 'Flames';
+        let purpleAppearance = new CGFappearance(this);
+        purpleAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        purpleAppearance.setShininess(0.1);
+        purpleAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        purpleAppearance.loadTexture("../resources/images/purple.jpg");
+        purpleAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
+        this.vehicleAppearances[1] = purpleAppearance;
+        this.vehicleAppearanceList[1] = 'Purple';
+
+        let camouflageAppearance = new CGFappearance(this);
+        camouflageAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        camouflageAppearance.setShininess(0.1);
+        camouflageAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        camouflageAppearance.loadTexture("../resources/images/camouflage.jpg");
+        camouflageAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
+        this.vehicleAppearances[2] = camouflageAppearance;
+        this.vehicleAppearanceList[2] = 'Camouflage';
 
         this.currVehicleAppearance = '0';
-        this.vehicleAppearance = 'Metal';
+        this.vehicleAppearance = 'Blue';
 
         //LUZES
         this.lightsState = {};
@@ -250,9 +260,24 @@ class LightingScene extends CGFscene {
         
 
         //display vehicle
+        let textString = '';
+        switch(this.currVehicleAppearance)
+        {
+            case 0:
+                textString = 'BLUE';
+                break;
+            case 1:
+                textString = 'PURPLE';
+                break;
+            case 2:
+                textString = 'CAMOUFLAGE';
+                break;
+            default:
+                break;
+        }
         
         if (this.vehicleAppearances[this.currVehicleAppearance] instanceof CGFappearance)
-            this.vehicle.setAppearance(this.vehicleAppearances[this.currVehicleAppearance]);
+            this.vehicle.setAppearance(this.vehicleAppearances[this.currVehicleAppearance],textString);
         
         if (!this.vehicle.isAttached)
         this.vehicle.display();

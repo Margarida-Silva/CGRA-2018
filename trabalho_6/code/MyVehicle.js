@@ -53,7 +53,26 @@ class MyVehicle extends CGFobject {
 		this.lampAppearance.setAmbient(0.3,0.3,0.3,1);
 		this.lampAppearance.setDiffuse(0.8,0.8,0.9,1);
 		this.lampAppearance.setSpecular(0.2,0.2,0.2,1);	
-		this.lampAppearance.setShininess(120);
+        this.lampAppearance.setShininess(120);
+        
+        //Front texture
+        this.frontAppearance = new CGFappearance(scene);
+        this.frontAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontAppearance.setShininess(0.1);
+        this.frontAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.frontAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+
+        //Back texture
+        this.backAppearance = new CGFappearance(scene);
+        this.backAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backAppearance.setShininess(0.1);
+        this.backAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.backAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+
+        this.setFrontAppearances();
+        this.setBackAppearances();
+    
+
     }
 
     //centrado na origem do referencial
@@ -100,10 +119,10 @@ class MyVehicle extends CGFobject {
         this.quad.display();
         this.scene.rotate(90*deg2rad,0,1,0);
         this.scene.scale(0.2/1.2,0.2/2.4,0.2);
-        this.scene.translate(3,4,2);
+        this.scene.translate(3,4.8,2);
         this.lampAppearance.apply();
         this.lamp.display();
-        this.scene.translate(0,-8,0);
+        this.scene.translate(0,-9.6,0);
         this.lamp.display();
         this.scene.popMatrix();
         this.applyCurrAppearance();
@@ -121,7 +140,9 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(90 * deg2rad, 0, 1, 0);
         this.scene.scale(2.4, 1, 1);
         this.scene.translate(0, 1.4 - 0.5, 2.45);
+        this.frontAppearance.apply();
         this.quad.display();
+        this.applyCurrAppearance();
         this.scene.popMatrix();
 
 
@@ -130,7 +151,9 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(-90 * deg2rad, 0, 1, 0);
         this.scene.scale(2.4, 1, 1);
         this.scene.translate(0, 1.4 - 0.5, 2.5);
+        this.backAppearance.apply();
         this.quad.display();
+        this.applyCurrAppearance();
         this.scene.popMatrix();
 
 
@@ -196,12 +219,75 @@ class MyVehicle extends CGFobject {
 
         this.scene.popMatrix();
 
-    };
+    }
 
-    setAppearance(appearance)
+    setAppearance(appearance, textString)
     {
         this.currApperance = appearance;
-    };
+                switch(textString)
+                {
+                case 'BLUE':
+                        this.backAppearance = this.backBlue;
+                        this.frontAppearance = this.frontBlue;
+                        break;
+                case 'PURPLE':
+                        this.backAppearance = this.backPurple;
+                        this.frontAppearance = this.frontPurple;
+                        break;
+                case 'CAMOUFLAGE':
+                        this.backAppearance = this.backCamouflage;
+                        this.frontAppearance = this.frontCamouflage;
+                        break;
+                };
+    }
+
+ setFrontAppearances()
+    {
+        this.frontBlue = new CGFappearance(this.scene);
+        this.frontBlue.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontBlue.setShininess(0.1);
+        this.frontBlue.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.frontBlue.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.frontBlue.loadTexture("../resources/images/front_blue.jpg");
+
+        this.frontPurple = new CGFappearance(this.scene);
+        this.frontPurple.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontPurple.setShininess(0.1);
+        this.frontPurple.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.frontPurple.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.frontPurple.loadTexture("../resources/images/front_purple.jpg");
+
+        this.frontCamouflage = new CGFappearance(this.scene);
+        this.frontCamouflage.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontCamouflage.setShininess(0.1);
+        this.frontCamouflage.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.frontCamouflage.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.frontCamouflage.loadTexture("../resources/images/front_camouflage.jpg");
+    }
+
+    setBackAppearances()
+    {
+        this.backBlue = new CGFappearance(this.scene);
+        this.backBlue.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backBlue.setShininess(0.1);
+        this.backBlue.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.backBlue.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.backBlue.loadTexture("../resources/images/back_blue.jpg");
+
+        this.backPurple = new CGFappearance(this.scene);
+        this.backPurple.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backPurple.setShininess(0.1);
+        this.backPurple.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.backPurple.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.backPurple.loadTexture("../resources/images/back_purple.jpg");
+
+        this.backCamouflage = new CGFappearance(this.scene);
+        this.backCamouflage.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backCamouflage.setShininess(0.1);
+        this.backCamouflage.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.backCamouflage.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.backCamouflage.loadTexture("../resources/images/back_camouflage.jpg");
+    }
 
     applyCurrAppearance()
     {
@@ -209,7 +295,8 @@ class MyVehicle extends CGFobject {
             this.currApperance.apply();
     }
 
-    update(motionDirection) {
+    update(motionDirection) 
+    {
 
         //update the vehicle's position
         if (motionDirection == 'W')
