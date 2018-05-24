@@ -102,14 +102,14 @@ class MyVehicle extends CGFobject {
         let angularVelocity = (-this.carSpeed / 0.53); //0.53: wheel's radius
         this.wheelsAngleMovement += angularVelocity;
 
-        this.applyCurrAppearance();
-
         //top
         this.scene.pushMatrix();
         this.scene.translate(-0.25, 1.4, -1.2);
         this.scene.scale(3 / 7, 0.6, 1);
         this.top.display();
         this.scene.popMatrix();
+
+        this.applyCurrAppearance();
 
         //front
         this.scene.pushMatrix();

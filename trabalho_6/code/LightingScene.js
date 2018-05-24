@@ -96,8 +96,8 @@ class LightingScene extends CGFscene {
         this.vehicleAppearances[2] = camouflageAppearance;
         this.vehicleAppearanceList[2] = 'Camouflage';
 
-        this.currVehicleAppearance = '0';
-        this.vehicleAppearance = 'Blue';
+        this.currVehicleAppearance = '2';
+        this.vehicleAppearance = 'Camouflage';
 
         //LUZES
         this.lightsState = {};
