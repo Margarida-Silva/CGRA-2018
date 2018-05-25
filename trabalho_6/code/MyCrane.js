@@ -38,11 +38,20 @@ class MyCrane extends CGFobject {
         this.horizontalAngle = 0;
         this.angleDec = 1*deg2rad;
         this.degreesLeft = 0;
+
+        //Texture
+        this.craneAppearance = new CGFappearance(scene);
+        this.craneAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.craneAppearance.setShininess(0.1);
+        this.craneAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.craneAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.craneAppearance.loadTexture("../resources/images/crane.jpg");
 	};
 
 	
 
 	display() {
+        this.craneAppearance.apply();
 
         let deg2rad = Math.PI / 180.0;
 

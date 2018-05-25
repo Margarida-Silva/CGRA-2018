@@ -93,5 +93,6 @@ class MyCylinder extends CGFobject {
 
 	display() {
 		this.drawElements(this.primitiveType);
+		this.displayTop();
 	}
 };
