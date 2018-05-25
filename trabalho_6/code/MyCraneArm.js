@@ -16,6 +16,7 @@ class MyCraneArm extends CGFobject {
 
 display(length) {
 
+display() {
         //Arm
         this.scene.pushMatrix();
         this.scene.scale(this.thickness, this.thickness, length);
