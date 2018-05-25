@@ -10,10 +10,14 @@ class MyCrane extends CGFobject {
         this.base = new MyCylinder(scene, 20, 20, true);
         this.arm = new MyCraneArm(scene);
         this.magnet = new MyMagnet(scene);
+        this.carpet = new Plane(scene, 10, 0, 1, 0, 1);
 
         let deg2rad = Math.PI / 180.0;
         this.arm1angle = 0*deg2rad;
         this.arm2angle = 0* deg2rad;
+
+        this.arm1length = 7;
+        this.arm2length = 3.5;
 
         //"Recolha"
         this.RX1 = 5;
@@ -69,7 +73,7 @@ class MyCrane extends CGFobject {
         
         this.scene.pushMatrix();
         this.scene.rotate(-90*deg2rad, 1, 0, 0);
-        this.arm.display();
+        this.arm.display(this.arm1length);
         this.scene.popMatrix();
         
 
@@ -78,7 +82,7 @@ class MyCrane extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
         this.scene.rotate(90*deg2rad, 0, 1, 0);
-        this.scene.translate(0, 10, 0);
+        this.scene.translate(0, this.arm1length / 0.5, 0);
         this.base.display();
         this.scene.popMatrix();
         
@@ -87,11 +91,10 @@ class MyCrane extends CGFobject {
          //Arm2
          
          this.scene.pushMatrix();
-         this.scene.translate(0, 5, 0);
-         this.scene.scale(1, 1, 0.7);
+         this.scene.translate(0, this.arm1length, 0);
          this.scene.rotate(this.arm2angle, 1, 0, 0);
-         this.scene.translate(0, -0.15, 0);
-         this.arm.display();
+         this.scene.translate(0, -(this.arm.thickness/2), 0);
+         this.arm.display(this.arm2length);
          this.scene.popMatrix();
          
 
@@ -99,8 +102,7 @@ class MyCrane extends CGFobject {
          this.scene.popMatrix();
 
          this.scene.pushMatrix();
-         //this.scene.translate(0, 0, -0.5);
-         this.scene.translate(0, Math.cos(this.arm1angle) * 5 - Math.sin(this.arm2angle + this.arm1angle)*5*0.7, Math.sin(this.arm1angle)*5 + Math.cos(this.arm2angle + this.arm1angle)*5*0.7);
+         this.scene.translate(0, Math.cos(this.arm1angle) * this.arm1length - Math.sin(this.arm2angle + this.arm1angle)*this.arm2length, Math.sin(this.arm1angle)*this.arm1length + Math.cos(this.arm2angle + this.arm1angle)*this.arm2length);
          this.magnet.display();
          this.scene.popMatrix();
 
@@ -109,19 +111,21 @@ class MyCrane extends CGFobject {
          // end of horizontal rotation
          this.scene.popMatrix();
 
-        
+         this.scene.pushMatrix();
+         //his.scene.scale(this.RX1-this.RX2, this.RY1 -this.RY2);
+         this.scene.rotate(90*deg2rad, 0,1, 0);
+         //this.scene.translate(this.RX1, this.RY1);
+         this.carpet.display();
+         this.scene.popMatrix();
+
          this.scene.popMatrix();
          
          this.scene.pushMatrix();
          this.scene.translate(10, 0, -10);
          this.scene.rotate(this.horizontalAngle, 0, 1, 0);
          this.scene.translate(-10, -0, 10);
-         if (this.vehicle != null){
-             console.log("displaying");
+         if (this.vehicle != null)
          this.vehicle.display();
-         }
-
-         this.scene.popMatrix();
 
          this.scene.popMatrix();
         }
