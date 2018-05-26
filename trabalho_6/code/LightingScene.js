@@ -256,7 +256,7 @@ class LightingScene extends CGFscene {
 
         //display terrain
         
-        this.terrain.display();
+        //this.terrain.display();
         
 
         //display vehicle
@@ -279,6 +279,9 @@ class LightingScene extends CGFscene {
         if (this.vehicleAppearances[this.currVehicleAppearance] instanceof CGFappearance)
             this.vehicle.setAppearance(this.vehicleAppearances[this.currVehicleAppearance],textString);
         
+        this.pushMatrix();
+        this.scale(0.5,0.5,0.5);
+        this.translate(-5, 0, -5);
         if (!this.vehicle.isAttached)
         this.vehicle.display();
         
@@ -287,6 +290,8 @@ class LightingScene extends CGFscene {
         //display crane
         this.pushMatrix();
         this.crane.display();
+        this.popMatrix();
+
         this.popMatrix();
 
     };
