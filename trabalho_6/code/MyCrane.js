@@ -17,9 +17,12 @@ class MyCrane extends CGFobject {
 
         this.defaultHorizontalAngle = 0;
         this.defaultVerticalAngle = 20 * deg2rad;
+        this.defaultSecVerticalAngle = 0*deg2rad;
+
+        this.piledCars = 0;
 
 
-        this.arm1angle = 0*deg2rad;
+        this.arm1angle = this.defaultSecVerticalAngle;
         this.arm2angle = this.defaultVerticalAngle;
 
         this.arm1length = 15;
@@ -55,9 +58,6 @@ class MyCrane extends CGFobject {
         this.catchingCarHDegrees = 0.0;
         this.carInitialAngle = 0.0;
 
-
-        this.carHeight = 5;
-
         //held car
         this.vehicle = null;
 
@@ -81,9 +81,9 @@ class MyCrane extends CGFobject {
 	display() {
         let deg2rad = Math.PI / 180.0;
 
-        if (this.vehicle != null)
-         if (this.vehicle.isAttached)
-         this.vehicle.display();
+        for(let i = 0; i < this.piledCars; i++){
+            this.cars[i].display();
+        }
 
         this.craneAppearance.apply();
 
@@ -102,6 +102,7 @@ class MyCrane extends CGFobject {
         this.scene.translate(this.DX/this.DLength, this.DY /this.DWidth, 0);
         this.carpet.display();
         this.scene.popMatrix();
+    
      
 
         this.scene.pushMatrix();
@@ -191,8 +192,19 @@ class MyCrane extends CGFobject {
         let deg2rad = Math.PI / 180.0;
         let angleToRotate = this.DhorizontalAngle -  this.horizontalAngle;
         let abs = Math.abs(angleToRotate);
+        let nCars = this.scene.oldVehiclesIndex;
+        let height = nCars * this.vehicle.height;
+        this.vehicle.carSpeed = 0;
 
-        let totalArmLength = (Math.sin(this.arm1angle)*this.arm1length) + (Math.cos(this.arm2angle + this.arm1angle)*this.arm2length);
+        let verticalAngle = this.arm2angle - Math.atan((Math.cos((this.arm2angle + this.arm1angle)*this.arm2length))/height);
+        
+        if (verticalAngle > 0){
+        let oldx = Math.sin(this.arm2angle + this.arm1angle)*this.arm2length;
+        this.arm2angle -= this.angleDec;
+        let newx = Math.sin(this.arm2angle + this.arm1angle)*this.arm2length;
+        console.log("add: " + (newx - oldx));
+        this.vehicle.z -= (newx - oldx);
+        }
 
         if (abs > 0 && (abs > this.angleDec)){
             let oldX = Math.sin(this.horizontalAngle);
@@ -229,9 +241,7 @@ class MyCrane extends CGFobject {
 
     update(currTime, vehicle){
         let deg2rad = Math.PI / 180.0;
-   
-        console.log(this.isCatchingCarH);
-
+        this.vehicle = vehicle;
         if (this.isMovingCar)
         this.move();
         else {
@@ -247,7 +257,6 @@ class MyCrane extends CGFobject {
                     this.vehicle = vehicle;
                     this.getCarAngle();
                     this.vehicle.carSpeed = 0;
-                    //console.log("present");
                     }
                     if (!this.vehicle.isAttached)
                     this.catchCar(this.vehicle);
@@ -264,7 +273,6 @@ class MyCrane extends CGFobject {
                 else if (this.isCatchingCarH){
                     this.rotatingCraneHToReturnToDefault();
                     this.inProcess = false;
-                    //this.isCatchingCarV = false;
                     }
             }
 
@@ -286,34 +294,36 @@ class MyCrane extends CGFobject {
     catchCarV(vehicle){
 
         let deg2rad = Math.PI / 180.0;
-        console.log("carv: " + this.catchingCarVFase);
         if (this.catchingCarVFase == 1){
             this.rotatingCraneVToCatch();
         }
         else if (this.catchingCarVFase == 2){
+            this.rotatingCraneVToDefault();
         }
     }
 
      /***** ROTATING VERTICALLY ******/
 
     rotatingCraneVToCatch(){
+        
+        let deg2rad = Math.PI / 180.0;
         let articulationAngle = this.arm1angle + this.arm2angle;
-        let X = (Math.cos(this.arm1angle)*this.arm1length) - this.carHeight;
+        let X = (Math.cos(this.arm1angle)*this.arm1length) - this.vehicle.height + 7*this.magnet.height;
         let Y = (Math.sin(this.arm1angle+this.arm2angle)*this.arm2length);
         let newAngle = Math.atan(X/Y);
-
         let angleToRotate = newAngle - articulationAngle;
+        console.log("angletorotate: " + (angleToRotate / deg2rad));
         //console.log("angletorotateV" + angleToRotate);
         let abs = Math.abs(angleToRotate);
 
         if (abs > 0 && (abs > this.angleDec)){
             if (angleToRotate > 0){
-            this.arm2angle += 2*this.angleDec;
-            this.arm1angle += this.angleDec;
+            this.arm2angle += this.angleDec;
+            this.arm1angle += 0.5*this.angleDec;
             }
             else {
-            this.arm2angle -= 2*this.angleDec;
-            this.arm1angle -= this.angleDec;
+            this.arm2angle -= this.angleDec;
+            this.arm1angle -= 0.5*this.angleDec;
             }
         }
         else {
@@ -328,20 +338,25 @@ class MyCrane extends CGFobject {
     }
 
     rotatingCraneVToDefault(){
-        //console.log("default");
+        let deg2rad = Math.PI / 180.0;
         let angleToRotate = this.arm2angle - this.defaultVerticalAngle;
-        //fconsole.log("rotating : " + angleToRotate);
         let abs = Math.abs(angleToRotate);
-        //console.log(abs);
-        //console.log(angleToRotate);
-        if (abs > 0 && (abs > this.angleDec)){
+
+        //console.log(this.arm1angle);
+        //console.log(this.defaultSecVerticalAngle);
+       
+    
+        if (abs > 0 && (abs > this.angleDec) ||(this.arm1angle > this.defaultSecVerticalAngle)){
             if (angleToRotate > 0){
-                console.log(this.arm2angle);
                 this.arm2angle -= this.angleDec;
-            console.log(this.arm2angle);
             }
             else {
-            this.arm2Angle += this.angleDec;
+                this.arm2angle += this.angleDec;
+            }
+
+            if (this.arm1angle > this.defaultSecVerticalAngle){
+                console.log("here");
+                this.arm1angle -= this.angleDec;
             }
         }
         else {
@@ -359,7 +374,6 @@ class MyCrane extends CGFobject {
         let finalAngle = angle - this.horizontalAngle;
 
         let angleToRotate = this.horizontalAngle - finalAngle;
-        //console.log("angletorotate" + angleToRotate);
         let abs = Math.abs(angleToRotate);
 
         if (abs > 0 && (abs > this.angleDec)){
@@ -376,7 +390,6 @@ class MyCrane extends CGFobject {
 
     rotatingCraneHToReturnToDefault(){
         let angleToRotate = this.horizontalAngle - this.defaultHorizontalAngle;
-        //fconsole.log("rotating : " + angleToRotate);
         let abs = Math.abs(angleToRotate);
         if (abs > 0 && (abs > this.angleDec)){
             if (angleToRotate > 0)
@@ -385,7 +398,6 @@ class MyCrane extends CGFobject {
             this.horizontalAngle += this.angleDec;
         }
             else {
-            //this.isCatchingCarH = false;
             this.catchingCarHFase = 1;
             }
     }
@@ -394,7 +406,6 @@ class MyCrane extends CGFobject {
     catchCar(vehicle){
         if (this.isCatchingCarH)
         this.catchCarH(vehicle);
-        console.log("catch: " + this.isCatchingCarV);
         if (this.isCatchingCarV)
         this.catchCarV(vehicle);
     }
@@ -414,6 +425,8 @@ class MyCrane extends CGFobject {
     dropCar(){
         console.log("drop");
         this.vehicle.isAttached = false;
+        this.vehicle.dropped = true;
+       
         //this.vehicle = null;
     }
 };

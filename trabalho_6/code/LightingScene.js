@@ -64,6 +64,10 @@ class LightingScene extends CGFscene {
         this.vehicle = new MyVehicle(this);
         this.crane = new MyCrane(this);
 
+        
+        this.oldVehicles = [];
+        this.oldVehiclesIndex = 0;
+
         //TEXTURAS
 
         this.vehicleAppearances = [];
@@ -281,17 +285,35 @@ class LightingScene extends CGFscene {
         if (this.vehicleAppearances[this.currVehicleAppearance] instanceof CGFappearance)
             this.vehicle.setAppearance(this.vehicleAppearances[this.currVehicleAppearance],textString);
         
-        if (!this.vehicle.isAttached)
         this.vehicle.display();
+
+        for (let i = 0; i< this.oldVehiclesIndex; i++){
+            this.oldVehicles[i].setAppearance(this.vehicleAppearances[this.currVehicleAppearance],textString);
+            this.oldVehicles[i].display();
+        }
         
-
-
         //display crane
         this.crane.display();
 
     };
 
     update(currTime){
+        if (this.vehicle.dropped){
+             
+        let newVehicle = new MyVehicle(this);
+        newVehicle.carLocation[0] = this.vehicle.carLocation[0];
+        newVehicle.carLocation[1] = this.vehicle.carLocation[1];
+        newVehicle.z = this.vehicle.z;
+        newVehicle.steerAngle = this.vehicle.steerAngle;
+        
+        this.oldVehicles.push(newVehicle);
+        this.oldVehiclesIndex++;
+
+        this.vehicle = new MyVehicle(this);
+        }
+
+        //console.log("ncars:" + this.oldVehiclesIndex);
+
         this.crane.update(currTime, this.vehicle);
     }
 

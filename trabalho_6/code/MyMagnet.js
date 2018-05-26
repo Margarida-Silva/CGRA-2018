@@ -12,6 +12,8 @@ class MyMagnet extends CGFobject {
          this.magnetAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
          this.magnetAppearance.loadTexture("../resources/images/magnet.jpg");
 
+         this.height = 3;
+
     };
 
     display() {
@@ -30,7 +32,6 @@ class MyMagnet extends CGFobject {
         this.magnetAppearance.apply();
 
         this.scene.pushMatrix();
-        //this.scene.translate(0, 0.5, 0);
         this.scene.rotate(90 * deg2rad, 1, 0, 0);
         this.magnetBlock.display();
         this.scene.popMatrix();
