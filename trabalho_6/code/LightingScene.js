@@ -195,6 +195,7 @@ class LightingScene extends CGFscene {
     checkKeys() {
         var text = "Keys pressed: ";
         var keysPressed = false;
+        if (!this.crane.isMovingCar){
         if (this.gui.isKeyPressed("KeyW")) {
             text += " W ";
             keysPressed = true;
@@ -220,6 +221,7 @@ class LightingScene extends CGFscene {
             this.crane.move();
             keysPressed = true;
         }
+    }
         if (keysPressed)
             console.log(text);
     }
