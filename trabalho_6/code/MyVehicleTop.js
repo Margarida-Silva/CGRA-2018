@@ -12,7 +12,7 @@ class MyVehicleTop extends CGFobject {
 
         //Side windows' texture
         this.sideWindowAppearance = new CGFappearance(scene);
-        this.sideWindowAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.sideWindowAppearance.setSpecular(0.5, 0.5, 0.5, 1);
         this.sideWindowAppearance.setShininess(0.1);
         this.sideWindowAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
         this.sideWindowAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
@@ -20,7 +20,7 @@ class MyVehicleTop extends CGFobject {
 
         //Back and front windows' texture
         this.backFrontWindowAppearance = new CGFappearance(scene);
-        this.backFrontWindowAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backFrontWindowAppearance.setSpecular(0.5, 0.5, 0.5, 1);
         this.backFrontWindowAppearance.setShininess(0.1);
         this.backFrontWindowAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
         this.backFrontWindowAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
@@ -28,7 +28,7 @@ class MyVehicleTop extends CGFobject {
 
         //Vehicle's top and bottom's texture
         this.topBottomAppearance = new CGFappearance(scene);
-        this.topBottomAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.topBottomAppearance.setSpecular(0.5, 0.5, 0.5, 1);
         this.topBottomAppearance.setShininess(0.1);
         this.topBottomAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
         this.topBottomAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
