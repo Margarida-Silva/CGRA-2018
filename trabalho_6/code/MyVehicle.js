@@ -54,15 +54,15 @@ class MyVehicle extends CGFobject {
         this.tireAppearance = new CGFappearance(scene);
         this.tireAppearance.setSpecular(0.1, 0.1, 0.1, 1);
         this.tireAppearance.setShininess(0.1);
-        this.tireAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tireAppearance.setDiffuse(0.3, 0.3, 0.3, 1);
         this.tireAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
         this.tireAppearance.loadTexture("../resources/images/tire.png");
 
         //Tire's top texture
         this.tireTopAppearance = new CGFappearance(scene);
-        this.tireTopAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        this.tireTopAppearance.setSpecular(0.5, 0.5, 0.5, 1);
         this.tireTopAppearance.setShininess(0.1);
-        this.tireTopAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.tireTopAppearance.setDiffuse(0.8, 0.8, 0.8, 1);
         this.tireTopAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
         this.tireTopAppearance.loadTexture("../resources/images/tire_rim.jpg");
 
@@ -98,14 +98,14 @@ class MyVehicle extends CGFobject {
      */
     setFrontAppearances() {
         this.frontBlue = new CGFappearance(this.scene);
-        this.frontBlue.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontBlue.setSpecular(0.5, 0.5, 0.5, 1);
         this.frontBlue.setShininess(0.1);
         this.frontBlue.setDiffuse(0.9, 0.9, 0.9, 1);
         this.frontBlue.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
         this.frontBlue.loadTexture("../resources/images/front_blue.jpg");
 
         this.frontPurple = new CGFappearance(this.scene);
-        this.frontPurple.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontPurple.setSpecular(0.5, 0.5, 0.5, 1);
         this.frontPurple.setShininess(0.1);
         this.frontPurple.setDiffuse(0.9, 0.9, 0.9, 1);
         this.frontPurple.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
@@ -124,14 +124,14 @@ class MyVehicle extends CGFobject {
      */
     setBackAppearances() {
         this.backBlue = new CGFappearance(this.scene);
-        this.backBlue.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backBlue.setSpecular(0.5, 0.5, 0.5, 1);
         this.backBlue.setShininess(0.1);
         this.backBlue.setDiffuse(0.9, 0.9, 0.9, 1);
         this.backBlue.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
         this.backBlue.loadTexture("../resources/images/back_blue.jpg");
 
         this.backPurple = new CGFappearance(this.scene);
-        this.backPurple.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backPurple.setSpecular(0.5, 0.5, 0.5, 1);
         this.backPurple.setShininess(0.1);
         this.backPurple.setDiffuse(0.9, 0.9, 0.9, 1);
         this.backPurple.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
