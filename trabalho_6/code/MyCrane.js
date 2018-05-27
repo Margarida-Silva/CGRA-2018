@@ -71,7 +71,7 @@ class MyCrane extends CGFobject {
         this.craneAppearance = new CGFappearance(scene);
         this.craneAppearance.setSpecular(0.1, 0.1, 0.1, 1);
         this.craneAppearance.setShininess(0.1);
-        this.craneAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.craneAppearance.setDiffuse(0.3, 0.3, 0.3, 1);
         this.craneAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
         this.craneAppearance.loadTexture("../resources/images/crane.jpg");
     };
