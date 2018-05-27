@@ -1,4 +1,10 @@
 class MyWheelPlate extends CGFobject {
+
+    /**
+ 	* MyWheelPlate
+	* @param gl {WebGLRenderingContext}
+ 	* @constructor
+ 	*/
     constructor(scene) {
     super(scene);
     this.height = 1;
@@ -7,7 +13,9 @@ class MyWheelPlate extends CGFobject {
     this.initBuffers();
     }
 
-
+    /**
+     * Method in which the geometry of the wheel's plate is defined
+     */
     initBuffers() {
         this.vertices = [];
         this.indices = [];

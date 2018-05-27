@@ -1,4 +1,10 @@
 class MyTrapeze extends CGFobject {
+
+    /**
+ 	* MyTrapeze
+	* @param gl {WebGLRenderingContext}
+ 	* @constructor
+ 	*/
     constructor(scene) {
         super(scene);
         this.x_divisions = 11;
@@ -7,6 +13,9 @@ class MyTrapeze extends CGFobject {
         this.initBuffers();
     }
 
+	/**
+	 * Method in which the geometry of the trapeze is defined
+	 */
     initBuffers() {
         this.vertices = [];
         this.indices = [];
