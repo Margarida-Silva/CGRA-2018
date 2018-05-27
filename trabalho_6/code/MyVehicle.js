@@ -24,6 +24,7 @@ class MyVehicle extends CGFobject {
         this.quad = new Plane(scene, 0, 1, 0, 1, 20);
         this.wheel = new MyCylinder(scene, 100, 5, true);
         this.lamp = new MyLamp(scene, 20, 20);
+        this.mirror = new MyMirror(scene);
 
         this.currApperance = null;
 
@@ -287,6 +288,21 @@ class MyVehicle extends CGFobject {
         this.tireTopAppearance.apply();
         this.wheel.displayTop();
         this.scene.popMatrix();
+
+        //Left mirror
+        this.scene.pushMatrix();
+        this.scene.rotate(-Math.PI,1,0,0);
+        this.scene.translate(1.2,-1.4,1.2);
+        this.scene.scale(0.3,0.3,0.3);
+        this.mirror.display();
+        this.scene.popMatrix();
+
+        //Right mirror
+         this.scene.pushMatrix();
+         this.scene.translate(1.2,1.4,1.2);
+         this.scene.scale(0.3,0.3,0.3);
+         this.mirror.display();
+         this.scene.popMatrix();
 
         this.scene.popMatrix();
 

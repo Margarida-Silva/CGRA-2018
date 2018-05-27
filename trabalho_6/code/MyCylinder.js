@@ -5,15 +5,17 @@ class MyCylinder extends CGFobject {
  	* @param gl {WebGLRenderingContext}
  	* @param {Number} slices	Number of sides in the cylinder
  	* @param {Number} stacks	Number of stories in the cylinder
- 	* @param {Boolean} withTop True if the cylinder shall have a top and false otherwise
+	* @param {Boolean} withTop True if the cylinder shall have a top and false otherwise
+	* @param {CGFappearance} topAppearance The appearance to be used in the cylinder's top
  	* @constructor
  	*/
-	constructor(scene, slices, stacks, withTop) {
+	constructor(scene, slices, stacks, withTop, topAppearance) {
 		super(scene);
 		this.slices = slices;
 		this.stacks = stacks;
 		this.top = new MyCylinderTop(scene, slices);
 		this.withTop = withTop;
+		this.topAppearance = topAppearance;
 		this.initBuffers();
 	};
 
@@ -86,15 +88,18 @@ class MyCylinder extends CGFobject {
 
 			let deg2rad = Math.PI / 180.0;
 
-			//bottom
-			this.scene.pushMatrix();
-			this.scene.rotate(-180 * deg2rad, 1, 0, 0);
-			this.top.display();
-			this.scene.popMatrix();
 
 			//top
 			this.scene.pushMatrix();
 			this.scene.translate(0, 0, 1);
+			this.top.display();
+			this.scene.popMatrix();
+
+			//bottom
+			if(this.topAppearance instanceof CGFappearance)
+			this.topAppearance.apply();
+			this.scene.pushMatrix();
+			this.scene.rotate(-180 * deg2rad, 1, 0, 0);
 			this.top.display();
 			this.scene.popMatrix();
 		}

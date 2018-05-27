@@ -70,7 +70,7 @@ class LightingScene extends CGFscene {
         this.terrain = new MyTerrain(this, 30, this.altimetry);
         this.vehicle = new MyVehicle(this);
         this.crane = new MyCrane(this);
-
+        
         this.oldVehicles = [];
         this.oldVehiclesIndex = 0;
 
@@ -272,7 +272,7 @@ class LightingScene extends CGFscene {
         // ---- END Background, camera and axis setup
 
         //display terrain
-        //this.terrain.display();
+        this.terrain.display();
 
         //display vehicle
         let textString = '';
@@ -302,8 +302,7 @@ class LightingScene extends CGFscene {
         }
 
         //display crane
-        this.crane.display();
-
+        //this.crane.display();
     };
 
     /**
