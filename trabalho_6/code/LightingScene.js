@@ -264,7 +264,6 @@ class LightingScene extends CGFscene {
         // ---- END Background, camera and axis setup
 
         //display terrain
-
         this.terrain.display();
 
 
@@ -323,8 +322,8 @@ class LightingScene extends CGFscene {
 
     updateVehicleLight() {
         let vehiclePos = this.vehicle.getPosition();
-        if (vehiclePos instanceof Array)    
-            this.lights[4].setPosition(vehiclePos[0], 5, -vehiclePos[1],1.0);
+        if (vehiclePos instanceof Array)
+            this.lights[4].setPosition(vehiclePos[0], 5, -vehiclePos[1], 1.0);
     }
 
 };
