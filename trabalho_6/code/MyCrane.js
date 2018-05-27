@@ -85,7 +85,7 @@ class MyCrane extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(-90 * this.deg2rad, 1, 0, 0);
         this.scene.scale(this.RLength, this.RWidth, 1);
-        this.scene.translate(0, 0,0.001); //so that the carpet is visible
+        this.scene.translate(0, 0,0.003); //so that the carpet is visible
         this.scene.translate(this.RX / this.RLength, this.RY / this.RWidth, 0);
         this.carpet.display();
         this.scene.popMatrix();
@@ -94,7 +94,7 @@ class MyCrane extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(-90 * this.deg2rad, 1, 0, 0);
         this.scene.scale(this.DLength, this.DWidth, 1);
-        this.scene.translate(0, 0,0.001); //so that the carpet is visible
+        this.scene.translate(0, 0,0.003); //so that the carpet is visible
         this.scene.translate(this.DX / this.DLength, this.DY / this.DWidth, 0);
         this.carpet.display();
         this.scene.popMatrix();
@@ -179,7 +179,6 @@ class MyCrane extends CGFobject {
     }
 
     move() {
-        console.log("move");
         let angleToRotate = this.DhorizontalAngle - this.arm1HorizontalAngle;
         let abs = Math.abs(angleToRotate);
         let nCars = this.scene.oldVehiclesIndex;
@@ -214,7 +213,6 @@ class MyCrane extends CGFobject {
         else {
             this.isMovingCar = false;
             this.isAtR = true;
-            //this.isAttached= false;
         }
     }
 
@@ -238,8 +236,6 @@ class MyCrane extends CGFobject {
                     this.inProcess = true;
                     this.vehicle = vehicle;
                     this.getCarAngle();
-                    console.log("v =0 ");
-                    this.vehicle.carSpeed = 0;
                 }
 
                 if (!this.vehicle.isAttached)
