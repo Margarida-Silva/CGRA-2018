@@ -1,6 +1,5 @@
 class MyInterface extends CGFinterface {
 
-
 	/**
 	 * MyInterface
 	 * @constructor
@@ -37,11 +36,11 @@ class MyInterface extends CGFinterface {
 		// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
 		// e.g. this.option1=true; this.option2=false;
 
-		group.add(this.scene, 'light1');
-		group.add(this.scene, 'light2');
-		group.add(this.scene, 'light3');
-		group.add(this.scene, 'light4');
-		group.add(this.scene, 'light5');
+		group.add(this.scene, 'light1').name("Light 1");
+		group.add(this.scene, 'light2').name("Light 2");
+		group.add(this.scene, 'light3').name("Light 3");
+		group.add(this.scene, 'light4').name("Light 4");
+		group.add(this.scene, 'light5').name("Light 5");
 
 		// add a slider
 		// must be a numeric variable of the scene, initialized in scene.init e.g.
@@ -50,8 +49,8 @@ class MyInterface extends CGFinterface {
 		this.gui.add(this.scene, 'speed', 0, 2);
 		this.initKeys();
 
-		//textures controller
-		this.gui.add(this.scene,'vehicleAppearance',this.scene.vehicleAppearanceList).name("Textures");
+		// textures controller
+		this.gui.add(this.scene, 'vehicleAppearance', this.scene.vehicleAppearanceList).name("Textures");
 
 		return true;
 	};

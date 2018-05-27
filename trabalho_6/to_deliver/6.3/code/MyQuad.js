@@ -1,10 +1,14 @@
-/**
- * MyQuad
- * @param gl {WebGLRenderingContext}
- * @constructor
- */
-
 class MyQuad extends CGFobject {
+
+	/**
+ 	* MyQuad
+	* @param gl {WebGLRenderingContext}
+	* @param {Number} minS Min value for the s coordinate of the texture
+	* @param {Number} maxS Max value for the s coordinate of the texture
+	* @param {Number} minT Min value for the t coordinate of the texture
+	* @param {Number} maxT Max value for the t coordinate of the texture
+ 	* @constructor
+ 	*/
 	constructor(scene, minS, maxS, minT, maxT) {
 		super(scene);
 		this.minS = minS;
@@ -14,6 +18,9 @@ class MyQuad extends CGFobject {
 		this.initBuffers();
 	};
 
+	/**
+	 * Method in which the geometry of the quad is defined
+	 */
 	initBuffers() {
 		this.vertices = [
 			-0.5, -0.5, 0,
@@ -29,10 +36,10 @@ class MyQuad extends CGFobject {
 
 
 		this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1
+			1, 1, 1,
+			1, 1, 1,
+			1, 1, 1,
+			1, 1, 1
 		];
 
 		this.texCoords = [
