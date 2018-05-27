@@ -1,12 +1,13 @@
-/**
- * MyCylinder
- * @param gl {WebGLRenderingContext}
- * @param {Number} slices	Number of sides in the cylinder
- * @param {Number} stacks	Number of stories in the cylinder
- * @param {Boolean} withTop True if the cylinder shall have a top and false otherwise
- * @constructor
- */
 class MyCylinder extends CGFobject {
+
+	/**
+	* MyCylinder
+ 	* @param gl {WebGLRenderingContext}
+ 	* @param {Number} slices	Number of sides in the cylinder
+ 	* @param {Number} stacks	Number of stories in the cylinder
+ 	* @param {Boolean} withTop True if the cylinder shall have a top and false otherwise
+ 	* @constructor
+ 	*/
 	constructor(scene, slices, stacks, withTop) {
 		super(scene);
 		this.slices = slices;

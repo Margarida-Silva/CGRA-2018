@@ -1,10 +1,11 @@
-/**
- * MyCylinderTop
- * @param gl {WebGLRenderingContext}
- * @param {Number} slices	Number of sides in the cylinder's top
- * @constructor
- */
 class MyCylinderTop extends CGFobject {
+
+	/**
+ 	* MyCylinderTop
+	* @param gl {WebGLRenderingContext}
+ 	* @param {Number} slices	Number of sides in the cylinder's top
+ 	* @constructor
+ 	*/
 	constructor(scene, slices) {
 		super(scene);
 		this.slices = slices;

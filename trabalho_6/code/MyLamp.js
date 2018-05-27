@@ -1,12 +1,12 @@
-/**
- * MyLamp
- * @param gl {WebGLRenderingContext}
- * @param {Number}	slices	Number of sides in the lamp
- * @param {Number}	stacks	Number of stories in the lamp
- * @constructor
- */
-
 class MyLamp extends CGFobject {
+
+	/**
+ 	* MyLamp
+	* @param gl {WebGLRenderingContext}
+ 	* @param {Number}	slices	Number of sides in the lamp
+ 	* @param {Number}	stacks	Number of stories in the lamp
+ 	* @constructor
+ 	*/
 	constructor(scene, slices, stacks) {
 		super(scene);
 		this.slices = slices;
