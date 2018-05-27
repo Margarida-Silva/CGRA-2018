@@ -14,7 +14,7 @@ class MyTerrain extends Plane {
         this.appearance.setSpecular(0.1, 0.1, 0.1, 1);
         this.appearance.setShininess(0.1);
         this.appearance.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.appearance.loadTexture("../resources/images/mountain2.png");
+        this.appearance.loadTexture("../resources/images/mountain.png");
         this.appearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
     };
 
