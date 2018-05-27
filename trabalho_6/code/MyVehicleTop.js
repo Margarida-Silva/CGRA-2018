@@ -79,7 +79,7 @@ class MyVehicleTop extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(90 * deg2rad, 0, 1, 0);
         this.scene.translate(-width / 2, 2 - (trapezeSide / 2) + trapezeSide / 2, trapezeB / 2 - (3 * (trapezeB / trapezeXDivisons)));
-        this.scene.rotate(-angle, 1, 0, 0); //corrigir angulo de rotacao
+        this.scene.rotate(-angle, 1, 0, 0); 
         this.scene.translate(0, -trapezeSide / 2, 0);
         this.scene.scale(width, trapezeSide, 1);
         this.quad.display();
@@ -89,7 +89,7 @@ class MyVehicleTop extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(-90 * deg2rad, 0, 1, 0);
         this.scene.translate(width / 2, 2 - (trapezeSide / 2) + trapezeSide / 2, trapezeB / 2 - (3 * (trapezeB / trapezeXDivisons)));
-        this.scene.rotate(-angle, 1, 0, 0); //corrigir angulo de rotacao
+        this.scene.rotate(-angle, 1, 0, 0); 
         this.scene.translate(0, -trapezeSide / 2, 0);
         this.scene.scale(width, trapezeSide, 1);
         this.quad.display();

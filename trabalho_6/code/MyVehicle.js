@@ -326,4 +326,9 @@ class MyVehicle extends CGFobject {
         else if (this.carSpeed < -0.25)
             this.carSpeed = -0.25;
     }
+
+    getPosition()
+    {
+        return this.carLocation;
+    }
 }
