@@ -228,10 +228,6 @@ class LightingScene extends CGFscene {
                 this.vehicle.update('D', this.speed);
                 keysPressed = true;
             }
-            if (this.gui.isKeyPressed("KeyR")) {
-                this.crane.move();
-                keysPressed = true;
-            }
         }
     }
 
@@ -272,7 +268,7 @@ class LightingScene extends CGFscene {
         // ---- END Background, camera and axis setup
 
         //display terrain
-        //this.terrain.display();
+        this.terrain.display();
 
         //display vehicle
         let textString = '';
@@ -323,6 +319,12 @@ class LightingScene extends CGFscene {
             this.oldVehiclesIndex++;
 
             this.vehicle = new MyVehicle(this);
+        }
+
+        for(let i = 0; i < this.oldVehiclesIndex; i++){
+            if ((this.oldVehicles[i].z) >= i*(this.vehicle.height + 0.5)){
+                this.oldVehicles[i].z -= 0.1;
+            }
         }
 
         this.updateVehicleLight();

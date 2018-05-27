@@ -37,6 +37,9 @@ class MyVehicle extends CGFobject {
         this.wheelBase = 3.0;
         this.dt = 2;
 
+        this.displayXCorrection = 0;
+        this.displayYCorrection = 0;
+
         this.z = 0;
 
         this.isAttached = false;
@@ -167,7 +170,7 @@ class MyVehicle extends CGFobject {
         this.carHeading = Math.atan2(frontWheel[1] - backWheel[1], frontWheel[0] - backWheel[0]);
         this.steerAngleRotation = 0;
 
-        this.scene.translate(this.carLocation[0], this.z, -this.carLocation[1]);
+        this.scene.translate(this.carLocation[0] + this.displayXCorrection, this.z, -this.carLocation[1] + this.displayYCorrection);
         this.scene.rotate(this.carHeading, 0, 1, 0);
 
         let angularVelocity = (-this.carSpeed / 0.53); //0.53: wheel's radius
