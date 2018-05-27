@@ -5,8 +5,6 @@ serialInclude = function (a) { var b = console, c = serialInclude.l; if (a.lengt
 serialInclude([
 	'../lib/CGF.js',
 	'LightingScene.js',
-	'MyCrane.js',
-	'MyCraneArm.js',
 	'MyCylinder.js',
 	'MyCylinderTop.js',
 	'MyInterface.js',
