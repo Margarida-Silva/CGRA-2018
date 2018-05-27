@@ -1,6 +1,17 @@
 /** Represents a plane with nrDivs divisions along both axis, with center at (0,0) */
 class Plane extends CGFobject {
 
+	/**
+ 	* Plane
+	* @param gl {WebGLRenderingContext}
+	* @param {Number} minS Min value for the s coordinate of the texture
+	* @param {Number} maxS Max value for the s coordinate of the texture
+	* @param {Number} minT Min value for the t coordinate of the texture
+	* @param {Number} maxT Max value for the t coordinate of the texture
+	* @param {Number} nrDivs Number of divisions along the x and y axis
+	* @param {Array} altimetry A multidimensonal array representing the z values of each vertice in the plane. If no altimetry is provided then the z values will all be equal to 0.
+ 	* @constructor
+ 	*/
 	constructor(scene, minS, maxS, minT, maxT, nrDivs, altimetry) {
 		super(scene);
 
@@ -20,6 +31,9 @@ class Plane extends CGFobject {
 		this.initBuffers();
 	};
 
+	/**
+	 * Method in which the geometry of the plane is defined
+	 */
 	initBuffers() {
 		/* example for nrDivs = 3 :
 		(numbers represent index of point in vertices array)
