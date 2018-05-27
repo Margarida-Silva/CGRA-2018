@@ -23,7 +23,7 @@ class MyPrism extends CGFobject {
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
-		this.normals = [];
+		this.normals = [];	
 
 		let deg2rad = Math.PI / 180.0;
 		let sliceAngle = (360.0 / this.slices) * deg2rad;
