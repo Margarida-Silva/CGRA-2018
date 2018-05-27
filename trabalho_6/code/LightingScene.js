@@ -80,7 +80,7 @@ class LightingScene extends CGFscene {
         this.vehicleAppearanceList = [];
 
         let blueAppearance = new CGFappearance(this);
-        blueAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        blueAppearance.setSpecular(0.5, 0.5, 0.5, 1);
         blueAppearance.setShininess(0.1);
         blueAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
         blueAppearance.loadTexture("../resources/images/blue.jpg");
@@ -89,7 +89,7 @@ class LightingScene extends CGFscene {
         this.vehicleAppearanceList[0] = 'Blue';
 
         let purpleAppearance = new CGFappearance(this);
-        purpleAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+        purpleAppearance.setSpecular(0.5, 0.5, 0.5, 1);
         purpleAppearance.setShininess(0.1);
         purpleAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
         purpleAppearance.loadTexture("../resources/images/purple.jpg");
