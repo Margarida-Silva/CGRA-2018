@@ -1,21 +1,29 @@
 class MyVehicle extends CGFobject {
-    /* DIMENSOES:
+    /* 
     
-    -comprimento: 5
-    -largura:2.4
-    -altura:2
-    -comprimento da base maior do trapezio: 3
-    -altura do trapezio: 0.6
-    -raio das rodas: 0.53
+    Vehicle dimensions:
+    
+    -length: 5
+    -width:2.4
+    -height:2
+    -longer trapezoid base length: 3
+    -trapezoid height: 0.6
+    -wheel radius: 0.53
 
     */
+
+    /**
+ 	* MyVehicle
+	* @param gl {WebGLRenderingContext}
+ 	* @constructor
+ 	*/
     constructor(scene) {
         super(scene);
         this.top = new MyVehicleTop(scene);
         this.bottom = new MyVehicleBottom(scene);
         this.quad = new Plane(scene, 0, 1, 0, 1, 20);
         this.wheel = new MyCylinder(scene, 100, 5, true);
-        this.lamp = new MyLamp(scene,20,20);
+        this.lamp = new MyLamp(scene, 20, 20);
 
         this.currApperance = null;
 
@@ -37,6 +45,9 @@ class MyVehicle extends CGFobject {
         this.width = 2.4;
         this.height = 2;
 
+        this.maxSpeed = 0.25;
+        this.maxSteerAngle = Math.PI/4;
+
         this.dropped = false;
 
         //Tire texture
@@ -57,11 +68,11 @@ class MyVehicle extends CGFobject {
 
         //Vehicle's lamp
         this.lampAppearance = new CGFappearance(scene);
-		this.lampAppearance.setAmbient(0.3,0.3,0.3,1);
-		this.lampAppearance.setDiffuse(0.8,0.8,0.9,1);
-		this.lampAppearance.setSpecular(0.2,0.2,0.2,1);	
+        this.lampAppearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.lampAppearance.setDiffuse(0.8, 0.8, 0.9, 1);
+        this.lampAppearance.setSpecular(0.2, 0.2, 0.2, 1);
         this.lampAppearance.setShininess(120);
-        
+
         //Front texture
         this.frontAppearance = new CGFappearance(scene);
         this.frontAppearance.setSpecular(0.1, 0.1, 0.1, 1);
@@ -78,11 +89,65 @@ class MyVehicle extends CGFobject {
 
         this.setFrontAppearances();
         this.setBackAppearances();
-    
+
 
     }
 
-    //centrado na origem do referencial
+    /**
+     * Defines the vehicle's front appearances. This method is called only once (by the constructor)
+     */
+    setFrontAppearances() {
+        this.frontBlue = new CGFappearance(this.scene);
+        this.frontBlue.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontBlue.setShininess(0.1);
+        this.frontBlue.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.frontBlue.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.frontBlue.loadTexture("../resources/images/front_blue.jpg");
+
+        this.frontPurple = new CGFappearance(this.scene);
+        this.frontPurple.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontPurple.setShininess(0.1);
+        this.frontPurple.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.frontPurple.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.frontPurple.loadTexture("../resources/images/front_purple.jpg");
+
+        this.frontCamouflage = new CGFappearance(this.scene);
+        this.frontCamouflage.setSpecular(0.1, 0.1, 0.1, 1);
+        this.frontCamouflage.setShininess(0.1);
+        this.frontCamouflage.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.frontCamouflage.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.frontCamouflage.loadTexture("../resources/images/front_camouflage.jpg");
+    }
+
+     /**
+     * Defines the vehicle's back appearances. This method is called only once (by the constructor)
+     */
+    setBackAppearances() {
+        this.backBlue = new CGFappearance(this.scene);
+        this.backBlue.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backBlue.setShininess(0.1);
+        this.backBlue.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.backBlue.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.backBlue.loadTexture("../resources/images/back_blue.jpg");
+
+        this.backPurple = new CGFappearance(this.scene);
+        this.backPurple.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backPurple.setShininess(0.1);
+        this.backPurple.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.backPurple.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.backPurple.loadTexture("../resources/images/back_purple.jpg");
+
+        this.backCamouflage = new CGFappearance(this.scene);
+        this.backCamouflage.setSpecular(0.1, 0.1, 0.1, 1);
+        this.backCamouflage.setShininess(0.1);
+        this.backCamouflage.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.backCamouflage.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+        this.backCamouflage.loadTexture("../resources/images/back_camouflage.jpg");
+    }
+
+    /**
+     * Displays the vehicle
+     */
     display() {
 
         let deg2rad = Math.PI / 180.0;
@@ -123,12 +188,12 @@ class MyVehicle extends CGFobject {
         this.scene.scale(1.20, 2.4, 1);
         this.scene.translate(((1.2 / 2) / 1.2) + (1.25 / 1.2), 0, 1.4);
         this.quad.display();
-        this.scene.rotate(90*deg2rad,0,1,0);
-        this.scene.scale(0.2/1.2,0.2/2.4,0.2);
-        this.scene.translate(3,4.8,2);
+        this.scene.rotate(90 * deg2rad, 0, 1, 0);
+        this.scene.scale(0.2 / 1.2, 0.2 / 2.4, 0.2);
+        this.scene.translate(3, 4.8, 2);
         this.lampAppearance.apply();
         this.lamp.display();
-        this.scene.translate(0,-9.6,0);
+        this.scene.translate(0, -9.6, 0);
         this.lamp.display();
         this.scene.popMatrix();
         this.applyCurrAppearance();
@@ -227,108 +292,69 @@ class MyVehicle extends CGFobject {
 
     }
 
-    setAppearance(appearance, textString)
-    {
+    /**
+     * Sets the vehicle's texture to the given texture
+     * @param {CGFappearance} appearance The appearance to be used in the vehicle
+     * @param {String} textString The word used to describe the given texture
+     */
+    setAppearance(appearance, textString) {
         this.currApperance = appearance;
-                switch(textString)
-                {
-                case 'BLUE':
-                        this.backAppearance = this.backBlue;
-                        this.frontAppearance = this.frontBlue;
-                        break;
-                case 'PURPLE':
-                        this.backAppearance = this.backPurple;
-                        this.frontAppearance = this.frontPurple;
-                        break;
-                case 'CAMOUFLAGE':
-                        this.backAppearance = this.backCamouflage;
-                        this.frontAppearance = this.frontCamouflage;
-                        break;
-                };
+        switch (textString) {
+            case 'BLUE':
+                this.backAppearance = this.backBlue;
+                this.frontAppearance = this.frontBlue;
+                break;
+            case 'PURPLE':
+                this.backAppearance = this.backPurple;
+                this.frontAppearance = this.frontPurple;
+                break;
+            case 'CAMOUFLAGE':
+                this.backAppearance = this.backCamouflage;
+                this.frontAppearance = this.frontCamouflage;
+                break;
+        };
     }
 
- setFrontAppearances()
-    {
-        this.frontBlue = new CGFappearance(this.scene);
-        this.frontBlue.setSpecular(0.1, 0.1, 0.1, 1);
-        this.frontBlue.setShininess(0.1);
-        this.frontBlue.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.frontBlue.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-        this.frontBlue.loadTexture("../resources/images/front_blue.jpg");
-
-        this.frontPurple = new CGFappearance(this.scene);
-        this.frontPurple.setSpecular(0.1, 0.1, 0.1, 1);
-        this.frontPurple.setShininess(0.1);
-        this.frontPurple.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.frontPurple.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-        this.frontPurple.loadTexture("../resources/images/front_purple.jpg");
-
-        this.frontCamouflage = new CGFappearance(this.scene);
-        this.frontCamouflage.setSpecular(0.1, 0.1, 0.1, 1);
-        this.frontCamouflage.setShininess(0.1);
-        this.frontCamouflage.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.frontCamouflage.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-        this.frontCamouflage.loadTexture("../resources/images/front_camouflage.jpg");
-    }
-
-    setBackAppearances()
-    {
-        this.backBlue = new CGFappearance(this.scene);
-        this.backBlue.setSpecular(0.1, 0.1, 0.1, 1);
-        this.backBlue.setShininess(0.1);
-        this.backBlue.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.backBlue.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-        this.backBlue.loadTexture("../resources/images/back_blue.jpg");
-
-        this.backPurple = new CGFappearance(this.scene);
-        this.backPurple.setSpecular(0.1, 0.1, 0.1, 1);
-        this.backPurple.setShininess(0.1);
-        this.backPurple.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.backPurple.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-        this.backPurple.loadTexture("../resources/images/back_purple.jpg");
-
-        this.backCamouflage = new CGFappearance(this.scene);
-        this.backCamouflage.setSpecular(0.1, 0.1, 0.1, 1);
-        this.backCamouflage.setShininess(0.1);
-        this.backCamouflage.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.backCamouflage.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-        this.backCamouflage.loadTexture("../resources/images/back_camouflage.jpg");
-    }
-
-    applyCurrAppearance()
-    {
+    /**
+     * Applies the current appearance to the vehicle. Called by the display method.
+     */
+    applyCurrAppearance() {
         if (this.currApperance instanceof CGFappearance)
             this.currApperance.apply();
     }
 
-    update(motionDirection) 
-    {
+    /**
+     * Updates the car's speed and/or the front wheels' direction given the user input.
+     * @param {String} motionDirection Must be one of the following: 'W','S','A' or 'D'
+     */
+    update(motionDirection) {
 
-        //update the vehicle's position
         if (motionDirection == 'W')
             this.carSpeed = this.carSpeed + 0.001;
         if (motionDirection == 'S')
             this.carSpeed = this.carSpeed - 0.001;
         if (motionDirection == 'A') {
             this.steerAngle += this.rotationAngle;
-            if (this.steerAngle >= (Math.PI / 4))
-                this.steerAngle = (Math.PI / 4);
-
+            if (this.steerAngle >= this.maxSteerAngle)
+                this.steerAngle =   this.maxSteerAngle;
         }
         if (motionDirection == 'D') {
             this.steerAngle -= this.rotationAngle;
-            if (Math.abs(this.steerAngle) >= (Math.PI / 4))
-                this.steerAngle = - (Math.PI / 4);
+            if (Math.abs(this.steerAngle) >= this.maxSteerAngle)
+                this.steerAngle = - this.maxSteerAngle;
         }
 
-        if (this.carSpeed > 0.25)
-            this.carSpeed = 0.25;
-        else if (this.carSpeed < -0.25)
-            this.carSpeed = -0.25;
+        if (this.carSpeed > this.maxSpeed)
+            this.carSpeed = this.maxSpeed;
+        else if (this.carSpeed < -this.maxSpeed)
+            this.carSpeed = -this.maxSpeed;
     }
 
-    getPosition()
-    {
+    /**
+     * Returns the car's position
+     * @returns {Array} The car's position 
+     */
+    getPosition() {
         return this.carLocation;
     }
 }
