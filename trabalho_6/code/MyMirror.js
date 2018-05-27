@@ -26,8 +26,6 @@ class MyMirror extends CGFobject {
          this.arm = new MyCylinder(scene, 20, 20, true);
          this.mirror = new MyCylinder(scene,20,20,true, this.mirrorAppearance);
 
-         this.height = 3;
-
     };
 
     /**
