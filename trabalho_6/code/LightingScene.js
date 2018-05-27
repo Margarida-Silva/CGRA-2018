@@ -210,37 +210,29 @@ class LightingScene extends CGFscene {
      * Update the vehicle's state or/and the crane's state based on user input
      */
     checkKeys() {
-        var text = "Keys pressed: ";
         var keysPressed = false;
         if (!this.crane.isMovingCar) {
             if (this.gui.isKeyPressed("KeyW")) {
-                text += " W ";
                 keysPressed = true;
                 this.vehicle.update('W', this.speed);
             }
             if (this.gui.isKeyPressed("KeyS")) {
-                text += " S ";
                 this.vehicle.update('S', this.speed);
                 keysPressed = true;
             }
             if (this.gui.isKeyPressed("KeyA")) {
-                text += " A ";
                 this.vehicle.update('A', this.speed);
                 keysPressed = true;
             }
             if (this.gui.isKeyPressed("KeyD")) {
-                text += " D ";
                 this.vehicle.update('D', this.speed);
                 keysPressed = true;
             }
             if (this.gui.isKeyPressed("KeyR")) {
-                text += " R ";
                 this.crane.move();
                 keysPressed = true;
             }
         }
-        if (keysPressed)
-            console.log(text);
     }
 
     /**
