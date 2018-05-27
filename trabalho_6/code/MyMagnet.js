@@ -13,7 +13,7 @@ class MyMagnet extends CGFobject {
          this.magnetAppearance = new CGFappearance(scene);
          this.magnetAppearance.setSpecular(0.1, 0.1, 0.1, 1);
          this.magnetAppearance.setShininess(0.1);
-         this.magnetAppearance.setDiffuse(0.9, 0.9, 0.9, 1);
+         this.magnetAppearance.setDiffuse(0.3, 0.3, 0.3, 1);
          this.magnetAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
          this.magnetAppearance.loadTexture("../resources/images/magnet.jpg");
 
