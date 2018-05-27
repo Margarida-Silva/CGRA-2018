@@ -1,10 +1,19 @@
 class MyVehicleBottom extends CGFobject {
+
+    /**
+ 	* MyVehicleBottom
+	* @param gl {WebGLRenderingContext}
+ 	* @constructor
+ 	*/
     constructor(scene) {
     super(scene);
     this.plate = new MyWheelPlate(scene);
     this.plane = new Plane(scene, 0, 1, 0, 1, 4);
     }
 
+    /**
+     * Displays the vehicle's bottom
+     */
     display(){
 
         let deg2rad=Math.PI/180.0;
