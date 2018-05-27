@@ -5,37 +5,32 @@ serialInclude=function(a){var b=console,c=serialInclude.l;if(a.length>0)c.splice
 serialInclude([
 	'../lib/CGF.js',
 	'LightingScene.js',
-	'MyCylinder.js',
-	'MyCylinderTop.js',
-	'MyLamp.js',
-	'MyQuad.js',
-	'MyUnitCubeQuad.js',
-	'Plane.js',
-	'MyTrapeze.js',
-	'MyVehicleTop.js',
-	'MyVehicle.js',
-	'MyVehicleBottom.js',
-	'MyWheelPlate.js',
-	'MyInterface.js',
-	'MyTerrain.js',
 	'MyCrane.js',
 	'MyCraneArm.js',
-	'MyPrism.js',
+	'MyCylinder.js',
+	'MyCylinderTop.js',
+	'MyInterface.js',
+	'MyLamp.js',
 	'MyMagnet.js',
+	'MyPrism.js',
+	'MyQuad.js',
+	'MyTrapeze.js',
+	'MyUnitCubeQuad.js',
+	'MyVehicle.js',
+	'MyVehicleBottom.js',
+	'MyVehicleTop.js',
+	'MyWheelPlate.js',
+	'Plane.js',
+	'MyTerrain.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
 		var myScene = new LightingScene();
 		var myInterface = new MyInterface();
-
 		app.init();
-
 		app.setScene(myScene);
 		app.setInterface(myInterface);
-
 		myInterface.setActiveCamera(myScene.camera);
-
 		app.run();
 	}
-
 	]);
