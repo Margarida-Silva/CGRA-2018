@@ -1,9 +1,11 @@
 /**
  * MyCylinder
  * @param gl {WebGLRenderingContext}
+ * @param {Number} slices	Number of sides in the cylinder
+ * @param {Number} stacks	Number of stories in the cylinder
+ * @param {Boolean} withTop True if the cylinder shall have a top and false otherwise
  * @constructor
  */
-
 class MyCylinder extends CGFobject {
 	constructor(scene, slices, stacks, withTop) {
 		super(scene);
@@ -14,6 +16,9 @@ class MyCylinder extends CGFobject {
 		this.initBuffers();
 	};
 
+	/**
+	 * Method in which the geometry of the cylinder is defined
+	 */
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
@@ -70,6 +75,9 @@ class MyCylinder extends CGFobject {
 		this.initGLBuffers();
 	};
 
+	/**
+	 * Displays the cylinder's top (if the value withTop is equal to true)
+	 */
 	displayTop() {
 		if (this.withTop) {
 
@@ -91,6 +99,9 @@ class MyCylinder extends CGFobject {
 		}
 	}
 
+	/**
+	 * Displays the cylinder and its top
+	 */
 	display() {
 		this.drawElements(this.primitiveType);
 		this.displayTop();

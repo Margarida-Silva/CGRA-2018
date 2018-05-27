@@ -1,9 +1,8 @@
 /**
- * MyCrane
+ * MyCraneArm
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-
 class MyCraneArm extends CGFobject {
 	constructor(scene) {
         super(scene);
@@ -11,6 +10,10 @@ class MyCraneArm extends CGFobject {
         this.thickness = 0.3;
 	};
 
+ /**
+ * Displays the crane's arm
+ * @param length {number} length The length of the crane's arm
+ */
 display(length) {
 
         //Arm

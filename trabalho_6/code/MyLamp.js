@@ -1,6 +1,8 @@
 /**
- * MyCylinder
+ * MyLamp
  * @param gl {WebGLRenderingContext}
+ * @param {Number}	slices	Number of sides in the lamp
+ * @param {Number}	stacks	Number of stories in the lamp
  * @constructor
  */
 
@@ -12,6 +14,9 @@ class MyLamp extends CGFobject {
 		this.initBuffers();
 	};
 
+	/**
+	 * Method in which the geometry of the lamp is defined
+	 */
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
@@ -35,7 +40,7 @@ class MyLamp extends CGFobject {
 
 			for (let j = 0; j < this.stacks; j++) {
 
-				let angle2 = (j+1) * stackAngle;
+				let angle2 = (j + 1) * stackAngle;
 
 				let x2 = x * Math.cos(angle2);
 				let y2 = y * Math.cos(angle2);
@@ -59,16 +64,16 @@ class MyLamp extends CGFobject {
 					this.indices.push(base2, base2 + 1, base1);
 				}
 
+			}
+
+			//top
+			if (i != this.slices - 1)
+				this.indices.push((i + 1) * this.stacks, (i + 2) * this.stacks, 0);
+			else
+				this.indices.push((i + 1) * this.stacks, this.stacks, 0);
+
 		}
 
-		//top
-		if (i != this.slices -1)
-		this.indices.push((i+1)*this.stacks, (i+2) * this.stacks, 0);
-		else 
-		this.indices.push((i+1) * this.stacks, this.stacks, 0);
-		
-	}
-		
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	};

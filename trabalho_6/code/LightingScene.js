@@ -1,9 +1,17 @@
 class LightingScene extends CGFscene {
 
+    /**
+    * LightingScene
+    * @constructor
+    */
     constructor() {
         super();
     }
 
+    /**
+     * Initialization of the scene to be used
+     * @param {CGFapplication} application 
+     */
     init(application) {
         super.init(application);
 
@@ -19,7 +27,7 @@ class LightingScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
-        //ALTIMETRY
+        //  altimetry
         this.altimetry = [
             [-5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -2.0, -1.0, -1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
             [-5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -3.0, -3.0, -3.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -4.0, -4.0, -3.0, -1.0, -1.0, 3.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
@@ -63,11 +71,10 @@ class LightingScene extends CGFscene {
         this.vehicle = new MyVehicle(this);
         this.crane = new MyCrane(this);
 
-
         this.oldVehicles = [];
         this.oldVehiclesIndex = 0;
 
-        //TEXTURES
+        //  textures
 
         this.vehicleAppearances = [];
         this.vehicleAppearanceList = [];
@@ -102,7 +109,7 @@ class LightingScene extends CGFscene {
         this.currVehicleAppearance = '2';
         this.vehicleAppearance = 'Camouflage';
 
-        //LIGHTS
+        //  lights
 
         this.lightsState = {};
         this['light1'] = true;
@@ -112,27 +119,18 @@ class LightingScene extends CGFscene {
         this['light5'] = true;
         this['wheels angle'] = 0;
 
-        //update scene
+        //  update scene
         this.setUpdatePeriod(5);
 
     };
 
-    updateLights() {
-        for (var i = 0; i < this.lights.length; i++) {
-            if (this['light' + (i + 1)])
-                this.lights[i].enable();
-            else
-                this.lights[i].disable();
-            this.lights[i].update();
-        }
-    }
-
-
+    /**
+     * Initialization of the scene's lights' properties
+     */
     initLights() {
 
         this.setGlobalAmbientLight(0, 0, 0, 0);
 
-        // Positions for four lights
         this.lights[0].setPosition(20.0, 2, 20.0, 1.0);
         this.lights[0].setVisible(true); // show marker on light position (different from enabled)
         this.lights[0].setAmbient(0, 0, 0, 1);
@@ -184,10 +182,16 @@ class LightingScene extends CGFscene {
 
     };
 
+    /**
+     * Initialization of the scene's camera
+     */
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     };
 
+    /**
+     * Configuration of the scene's default appearance
+     */
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -195,10 +199,16 @@ class LightingScene extends CGFscene {
         this.setShininess(10.0);
     };
 
+    /**
+     * Change the axis display state: on/off
+     */
     axisControl() {
         this.axisState = !this.axisState;
     };
 
+    /**
+     * Update the vehicle's state or/and the crane's state based on user input
+     */
     checkKeys() {
         var text = "Keys pressed: ";
         var keysPressed = false;
@@ -233,11 +243,17 @@ class LightingScene extends CGFscene {
             console.log(text);
     }
 
+    /**
+     * Update the vehicle's appearance based on the interface's current selection
+     */
     inputHandle() {
         this.checkKeys();
         this.currVehicleAppearance = this.vehicleAppearanceList.indexOf(this.vehicleAppearance);
     }
 
+    /**
+     * Display of the scene's elements: axis (when on), terrain, crane, vehicle, lights
+     */
     display() {
         this.inputHandle();
         let deg2rad = Math.PI / 180.0;
@@ -266,7 +282,6 @@ class LightingScene extends CGFscene {
         //display terrain
         this.terrain.display();
 
-
         //display vehicle
         let textString = '';
         switch (this.currVehicleAppearance) {
@@ -283,6 +298,7 @@ class LightingScene extends CGFscene {
                 break;
         }
 
+        //  Update the vehicle's appearance
         if (this.vehicleAppearances[this.currVehicleAppearance] instanceof CGFappearance)
             this.vehicle.setAppearance(this.vehicleAppearances[this.currVehicleAppearance], textString);
 
@@ -298,6 +314,10 @@ class LightingScene extends CGFscene {
 
     };
 
+    /**
+     * Updates some of the scene's elements: vehicles, crane
+     * @param {Number} currTime The current time in milliseconds
+     */
     update(currTime) {
         if (this.vehicle.dropped) {
 
@@ -314,16 +334,29 @@ class LightingScene extends CGFscene {
         }
 
         this.updateVehicleLight();
-
-        //console.log("ncars:" + this.oldVehiclesIndex);
-
         this.crane.update(currTime, this.vehicle);
     }
 
+    /**
+     * Updates the position of the light which is following the vehicle
+     */
     updateVehicleLight() {
         let vehiclePos = this.vehicle.getPosition();
         if (vehiclePos instanceof Array)
             this.lights[4].setPosition(vehiclePos[0], 5, -vehiclePos[1], 1.0);
+    }
+
+    /**
+     * Updates the state of the lights in the scene (enabled/disabled) based on the interface's current properties
+     */
+    updateLights() {
+        for (var i = 0; i < this.lights.length; i++) {
+            if (this['light' + (i + 1)])
+                this.lights[i].enable();
+            else
+                this.lights[i].disable();
+            this.lights[i].update();
+        }
     }
 
 };
