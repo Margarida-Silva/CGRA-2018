@@ -170,7 +170,7 @@ class LightingScene extends CGFscene {
         this.lights[3].setQuadraticAttenuation(0);
         this.lights[3].enable();
 
-        this.lights[4].setPosition(0.0, 40, 10.0, 1.0);
+        this.lights[4].setPosition(0.0, 10, 0.0, 1.0);
         this.lights[4].setVisible(true);
         this.lights[4].setAmbient(0, 0, 0, 1);
         this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -302,7 +302,7 @@ class LightingScene extends CGFscene {
         }
 
         //display crane
-        //this.crane.display();
+        this.crane.display();
     };
 
     /**
