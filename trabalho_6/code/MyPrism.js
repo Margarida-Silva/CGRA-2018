@@ -1,10 +1,13 @@
-/**
- * MyQuad
- * @param gl {WebGLRenderingContext}
- * @constructor
- */
-
 class MyPrism extends CGFobject {
+
+	/**
+ 	* MyPrism
+	* @param gl {WebGLRenderingContext}
+	* @param {Number}	slices	Number of sides in the prism
+	* @param {Number}	stacks	Number of stories in the prism
+	* @param {Boolean}	withTop True if the prism shall have a top and false otherwise
+ 	* @constructor
+ 	*/
 	constructor(scene, slices, stacks, withTop) {
 		super(scene);
 		this.slices = slices;
@@ -14,6 +17,9 @@ class MyPrism extends CGFobject {
 		this.initBuffers();
 	};
 
+	/**
+	 * Method in which the geometry of the prism is defined
+	 */
 	initBuffers() {
 		this.vertices = [];
 		this.indices = [];
@@ -63,11 +69,12 @@ class MyPrism extends CGFobject {
 		this.initGLBuffers();
 	};
 
-	display() {
-		this.drawElements(this.primitiveType);
-
+	/**
+	 * Displays the prism's top (if the value withTop is equal to true)
+	 */
+	displayTop() {
 		if (this.withTop) {
-			////// prism's bottom and top //////
+			//	prism's bottom and top 
 
 			let deg2rad = Math.PI / 180.0;
 
@@ -83,6 +90,13 @@ class MyPrism extends CGFobject {
 			this.top.display();
 			this.scene.popMatrix();
 		}
+	}
 
+	/**
+	 * Displays the prism and its top 
+	 */
+	display() {
+		this.drawElements(this.primitiveType);
+		this.displayTop();
 	}
 };

@@ -1,5 +1,10 @@
 class MyMagnet extends CGFobject {
 
+    /**
+    * MyMagnet
+    * @param gl {WebGLRenderingContext}
+    * @constructor
+    */
     constructor(scene) {
         super(scene);
         this.magnetBlock = new MyCylinder(scene, 20, 20, true);
@@ -16,6 +21,9 @@ class MyMagnet extends CGFobject {
 
     };
 
+    /**
+     * Displays the magnet
+     */
     display() {
         let deg2rad = Math.PI / 180.0;
 
