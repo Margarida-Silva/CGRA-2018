@@ -77,7 +77,9 @@ class MyCrane extends CGFobject {
     };
 
 
-
+    /**
+     * Displays the crane's body
+     */
     display() {
         let deg2rad = Math.PI / 180.0;
 
@@ -177,7 +179,7 @@ class MyCrane extends CGFobject {
 
         this.scene.popMatrix();
     }
-
+    
     setArm1Angle(angle) {
         let deg2rad = Math.PI / 180.0;
         this.angle1 = angle * deg2rad;
