@@ -58,7 +58,7 @@ class MyCylinder extends CGFobject {
 
 				if (i == this.slices - 1) {
 					let base1 = (this.stacks + 1) * i + j;
-					let base2 = j //equivalent to i==0;
+					let base2 = j 
 					this.indices.push(base1 + 1, base1, base2 + 1);
 					this.indices.push(base2, base2 + 1, base1);
 				}
@@ -73,7 +73,8 @@ class MyCylinder extends CGFobject {
 	displayTop()
 	{
 		if (this.withTop) {
-			////// cylinder's bottom and top //////
+			
+			//cylinder's bottom and top 
 
 			let deg2rad = Math.PI / 180.0;
 
