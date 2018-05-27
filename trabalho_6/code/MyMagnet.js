@@ -17,7 +17,7 @@ class MyMagnet extends CGFobject {
          this.magnetAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
          this.magnetAppearance.loadTexture("../resources/images/magnet.jpg");
 
-         this.height = 3;
+         this.height = 3.5;
 
     };
 
