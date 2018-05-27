@@ -1,5 +1,12 @@
 class MyTerrain extends Plane {
 
+    /**
+ 	* MyTerrain
+	* @param gl {WebGLRenderingContext}
+	* @param {Number} nrDivs Number of divisions along the x and y axis (to be used in the plane's constructor)
+	* @param {Array} altimetry A multidimensonal array representing the z values of each vertice in the plane
+ 	* @constructor
+ 	*/
     constructor(scene, nrDivs,altimetry) {
         super(scene, 0, 1, 0, 1, nrDivs,altimetry);
 
@@ -11,6 +18,9 @@ class MyTerrain extends Plane {
         this.appearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
     };
 
+    /**
+     * Displays the terrain 
+     */
     display() {
         let deg2rad = Math.PI / 180.0;
 
