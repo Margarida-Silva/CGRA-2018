@@ -1,4 +1,10 @@
 class MyVehicleTop extends CGFobject {
+
+    /**
+ 	* MyVehicleTop
+	* @param gl {WebGLRenderingContext}
+ 	* @constructor
+ 	*/
     constructor(scene) {
         super(scene);
         this.trapeze = new MyTrapeze(scene);
@@ -31,6 +37,9 @@ class MyVehicleTop extends CGFobject {
 
     }
 
+    /**
+     * Displays the vehicle's top
+     */
     display() {
         let deg2rad = Math.PI / 180.0;
         let trapezeB = 7;
