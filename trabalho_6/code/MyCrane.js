@@ -12,12 +12,11 @@ class MyCrane extends CGFobject {
         this.magnet = new MyMagnet(scene);
         this.carpet = new Plane(scene, 0, 1, 0, 1, 10);
 
+        this.deg2rad = Math.PI / 180;
 
-        let deg2rad = Math.PI / 180.0;
-
-        this.defaultHorizontalAngle = 0;
-        this.defaultVerticalAngle = 20 * deg2rad;
-        this.defaultSecVerticalAngle = 0 * deg2rad;
+        this.defaultHorizontalAngle = 180 * this.deg2rad;
+        this.defaultVerticalAngle = 20 * this.deg2rad;
+        this.defaultSecVerticalAngle = 0 * this.deg2rad;
 
         this.piledCars = 0;
 
@@ -63,9 +62,9 @@ class MyCrane extends CGFobject {
 
         //angle left to move
 
-        this.horizontalAngle = this.defaultHorizontalAngle;
-        this.DhorizontalAngle = 180 * deg2rad;
-        this.angleDec = 1 * deg2rad;
+        this.horizontalAngle = 180 * this.deg2rad;
+        this.DhorizontalAngle = this.defaultHorizontalAngle;
+        this.angleDec = 1 * this.deg2rad;
 
         //Texture
         this.craneAppearance = new CGFappearance(scene);
@@ -81,17 +80,19 @@ class MyCrane extends CGFobject {
      * Displays the crane's body
      */
     display() {
-        let deg2rad = Math.PI / 180.0;
 
+        /*
         for (let i = 0; i < this.piledCars; i++) {
             this.cars[i].display();
         }
+
+        */
 
         this.craneAppearance.apply();
 
         //RCarpet
         this.scene.pushMatrix();
-        this.scene.rotate(-90 * deg2rad, 1, 0, 0);
+        this.scene.rotate(-90 * this.deg2rad, 1, 0, 0);
         this.scene.scale(this.RLength, this.RWidth, 1);
         this.scene.translate(this.RX / this.RLength, this.RY / this.RWidth, 0);
         this.carpet.display();
@@ -99,19 +100,15 @@ class MyCrane extends CGFobject {
 
         //DCarpet
         this.scene.pushMatrix();
-        this.scene.rotate(-90 * deg2rad, 1, 0, 0);
+        this.scene.rotate(-90 * this.deg2rad, 1, 0, 0);
         this.scene.scale(this.DLength, this.DWidth, 1);
         this.scene.translate(this.DX / this.DLength, this.DY / this.DWidth, 0);
         this.carpet.display();
         this.scene.popMatrix();
 
-
-
         this.scene.pushMatrix();
         this.scene.pushMatrix();
         this.scene.translate(this.craneX, this.craneY, this.craneZ);
-
-
 
         this.scene.pushMatrix();
         this.scene.rotate(this.horizontalAngle, 0, 1, 0);
@@ -121,7 +118,7 @@ class MyCrane extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0);
         this.scene.scale(0.7, 0.5, 0.7);
-        this.scene.rotate(90 * deg2rad, 1, 0, 0);
+        this.scene.rotate(90 * this.deg2rad, 1, 0, 0);
         this.base.display();
         this.scene.popMatrix();
 
@@ -134,7 +131,7 @@ class MyCrane extends CGFobject {
         //Arm1
 
         this.scene.pushMatrix();
-        this.scene.rotate(-90 * deg2rad, 1, 0, 0);
+        this.scene.rotate(-90 * this.deg2rad, 1, 0, 0);
         this.arm.display(this.arm1length);
         this.scene.popMatrix();
 
@@ -143,7 +140,7 @@ class MyCrane extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
-        this.scene.rotate(90 * deg2rad, 0, 1, 0);
+        this.scene.rotate(90 * this.deg2rad, 0, 1, 0);
         this.scene.translate(0, this.arm1length / 0.5, -0.5);
         this.base.display();
         this.scene.popMatrix();
@@ -181,17 +178,14 @@ class MyCrane extends CGFobject {
     }
     
     setArm1Angle(angle) {
-        let deg2rad = Math.PI / 180.0;
-        this.angle1 = angle * deg2rad;
+        this.angle1 = angle * this.deg2rad;
     }
 
     setArm2Angle(angle) {
-        let deg2rad = Math.PI / 180.0;
-        this.angle2 = angle * deg2rad;
+        this.angle2 = angle * this.deg2rad;
     }
 
     move() {
-        let deg2rad = Math.PI / 180.0;
         let angleToRotate = this.DhorizontalAngle - this.horizontalAngle;
         let abs = Math.abs(angleToRotate);
         let nCars = this.scene.oldVehiclesIndex;
@@ -242,7 +236,6 @@ class MyCrane extends CGFobject {
     }
 
     update(currTime, vehicle) {
-        let deg2rad = Math.PI / 180.0;
         this.vehicle = vehicle;
         if (this.isMovingCar)
             this.move();
@@ -283,7 +276,6 @@ class MyCrane extends CGFobject {
 
 
     catchCarH(vehicle) {
-        let deg2rad = Math.PI / 180.0;
         if (this.catchingCarHFase == 1) {
             this.inProcess = true;
             this.rotatingCraneHToCatch();
@@ -294,8 +286,6 @@ class MyCrane extends CGFobject {
     }
 
     catchCarV(vehicle) {
-
-        let deg2rad = Math.PI / 180.0;
         if (this.catchingCarVFase == 1) {
             this.rotatingCraneVToCatch();
         }
@@ -307,14 +297,12 @@ class MyCrane extends CGFobject {
     /***** ROTATING VERTICALLY ******/
 
     rotatingCraneVToCatch() {
-
-        let deg2rad = Math.PI / 180.0;
         let articulationAngle = this.arm1angle + this.arm2angle;
         let X = (Math.cos(this.arm1angle) * this.arm1length) - this.vehicle.height + 7 * this.magnet.height;
         let Y = (Math.sin(this.arm1angle + this.arm2angle) * this.arm2length);
         let newAngle = Math.atan(X / Y);
         let angleToRotate = newAngle - articulationAngle;
-        console.log("angletorotate: " + (angleToRotate / deg2rad));
+        console.log("angletorotate: " + (angleToRotate / this.deg2rad));
         //console.log("angletorotateV" + angleToRotate);
         let abs = Math.abs(angleToRotate);
 
@@ -340,7 +328,6 @@ class MyCrane extends CGFobject {
     }
 
     rotatingCraneVToDefault() {
-        let deg2rad = Math.PI / 180.0;
         let angleToRotate = this.arm2angle - this.defaultVerticalAngle;
         let abs = Math.abs(angleToRotate);
 

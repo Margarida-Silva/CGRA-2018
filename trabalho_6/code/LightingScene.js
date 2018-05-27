@@ -280,7 +280,7 @@ class LightingScene extends CGFscene {
         // ---- END Background, camera and axis setup
 
         //display terrain
-        this.terrain.display();
+        //this.terrain.display();
 
         //display vehicle
         let textString = '';
