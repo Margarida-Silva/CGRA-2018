@@ -1,6 +1,5 @@
 class MyInterface extends CGFinterface {
 
-
 	/**
 	 * MyInterface
 	 * @constructor
@@ -50,8 +49,8 @@ class MyInterface extends CGFinterface {
 		this.gui.add(this.scene, 'speed', 0, 2);
 		this.initKeys();
 
-		//textures controller
-		this.gui.add(this.scene,'vehicleAppearance',this.scene.vehicleAppearanceList).name("Textures");
+		// textures controller
+		this.gui.add(this.scene, 'vehicleAppearance', this.scene.vehicleAppearanceList).name("Textures");
 
 		return true;
 	};
