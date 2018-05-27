@@ -18,6 +18,7 @@ serialInclude([
 	'MyWheelPlate.js',
 	'MyInterface.js',
 	'MyTerrain.js',
+	'MyMirror.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
