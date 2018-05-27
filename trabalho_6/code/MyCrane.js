@@ -170,8 +170,8 @@ class MyCrane extends CGFobject {
         this.scene.popMatrix();
     }
     
-    /*
-    * Updates the vehicles position and crane angles while moving the car from R to D
+    /**
+    * Updates the vehicle's position and crane angles while moving the car from R to D
     */
 
     move() {
@@ -212,16 +212,20 @@ class MyCrane extends CGFobject {
         }
     }
 
-    /*
-    * Verifies is vehicle is within R bounds
+    /**
+    * Verifies if the vehicle is within R bounds
+    * @param {MyVehicle} vehicle - Vehicle whose location is being tested
+    * @returns {Boolean} - If vehicle is withing R bounds true, false otherwise
     */
 
     vehicleWithinBounds(vehicle) {
         return ((vehicle.carLocation[0] >= this.RX - (this.RLength / 2)) && (vehicle.carLocation[0] <= (this.RX + (this.RLength / 2))) && (vehicle.carLocation[1] >= (this.RY / 2)) && (vehicle.carLocation[1] <= (this.RY + (this.RWidth / 2))));
     }
 
-    /*
+    /**
     * Calls the right function of crane movement according to its state variables
+    * @param {MyVehicle} vehicle - Vehicle to be updated
+    * @param {Number} currTime - The current time in milliseconds
     */
     update(currTime, vehicle) {
         this.vehicle = vehicle;
@@ -266,9 +270,11 @@ class MyCrane extends CGFobject {
         }
     }
 
-    /*
+    /**
     * Calls the function of horizontal catching car movement according to the catching fase
+    * @param {MyVehicle} vehicle - Vehicle to be caught
     */
+
 
     catchCarH(vehicle) {
         if (this.catchingCarHFase == 1) {
@@ -280,8 +286,9 @@ class MyCrane extends CGFobject {
         }
     }
 
-    /*
+    /**
     * Calls the function of vertical catching car movement according to the catching fase
+    * @param {MyVehicle} vehicle - Vehicle to be caught
     */
 
     catchCarV(vehicle) {
@@ -295,7 +302,7 @@ class MyCrane extends CGFobject {
 
     /***** ROTATING VERTICALLY ******/
 
-    /*
+    /**
     * Updates the crane state and vehicle position while the second is being attached to the first is a vertical way
     */
 
@@ -353,7 +360,7 @@ class MyCrane extends CGFobject {
 
     }
 
-    /*
+    /**
     * Makes the crane return to its default vertical position
     */
 
@@ -381,8 +388,8 @@ class MyCrane extends CGFobject {
 
     /***** ROTATING HORIZONTALLY ******/
 
-    /*
-    * Updates the crane state and vehicle position while the second is being attached to the first is a horizontal way
+    /**
+    * Updates the crane's state and vehicle's position while the second is being attached to the first in a horizontal way
     */
 
     rotatingCraneHorizontallyToCatchAtR() {
@@ -406,8 +413,8 @@ class MyCrane extends CGFobject {
         }
     }
 
-     /*
-    * Makes the crane return to its default horizontal position
+     /**
+    /* Makes the crane return to its default horizontal position
     */
 
     rotatingCraneHorizontallyToDefaultAtD() {
@@ -425,8 +432,9 @@ class MyCrane extends CGFobject {
         }
     }
 
-    /*
-    * Calls the crane's adequate function to catch the veicicle acording the catching state
+    /**
+    * Calls the crane's adequate function to catch the vehicle acording the catching state
+    * @param {MyVehicle} vehicle - Vehicle to be caught
     */
 
     catchCar(vehicle) {
@@ -436,7 +444,7 @@ class MyCrane extends CGFobject {
             this.catchCarV(vehicle);
     }
 
-    /*
+    /**
     * Gets the car angle in relation to the arm1 horizontal angle
     */
 
@@ -450,7 +458,7 @@ class MyCrane extends CGFobject {
     }
 
 
-    /*
+    /**
     * Drops the vehicle
     */
     dropCar() {
