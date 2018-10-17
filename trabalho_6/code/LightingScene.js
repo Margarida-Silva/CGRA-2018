@@ -9,6 +9,7 @@ class LightingScene extends CGFscene {
     }
 
     //comment2
+    //Comment 3
     /**
      * Initialization of the scene to be used
      * @param {CGFapplication} application 
