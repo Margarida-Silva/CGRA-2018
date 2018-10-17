@@ -7,9 +7,6 @@ class LightingScene extends CGFscene {
     constructor() {
         super();
     }
-
-    //comment2
-    //comment 4
     /**
      * Initialization of the scene to be used
      * @param {CGFapplication} application 
